@@ -23,19 +23,20 @@ presults = 1    # Flag to print sorted results
 ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
 plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
 ## Remove all the owner less posts
-topop = []
 for i in range(len(plist)):
-    if plist[i].split(':')[2] == '':
-        topop.append(i)
-
-for i in range(len(topop)):
-    plist.pop(topop[i])
+    temp = plist[i].split(':')
+    if temp[2] == '':
+        temp[2] = '-2'
+        inback = ':'.join(temp)
+        plist[i] = inback
 
 if pflag == 1:
     print(plist)
 
 ## Get list for Userid:displayname:Reputation
 ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-user-id-name.sh')
+## Insert a Dummy user with Id '-2'
+ulist.append('-2:Dummy:0')
 if pflag == 1:
     print(ulist)
 udict = {v.split(':')[0]:v.split(':')[1] for v in ulist}
@@ -148,6 +149,9 @@ for post in plist:
             A[idx,x_theory.index(temp[1])] = -1/4
             A[x_theory.index(temp[1]),idx] = -1/3 * 1/Unq[temp[1]]  # for u_k, Partial fu
         B[idx,0] = 1/4 * (Na[temp[0]]/maxNa + vq[temp[0]]/maxvq + avgsumva[temp[0]]/maxavgsumva)
+    else:
+        ## Other PostTypeId
+        A[idx,idx] = 1
     idx += 1
 
 for user in ulist:
@@ -155,15 +159,14 @@ for user in ulist:
     B[idx,0] = 1/3 * (repu[user.split(':')[0]]/maxrepu)
     idx += 1
 
-#print(A)
-#print(B)
+if hinplot == 1:
+    hinton(A)
+    hinton(B)
 solution = np.linalg.solve(A,B)
 out = dict(zip(x_theory,solution))
 #pprint.pprint(out)
 
 if hinplot == 1:
-    hinton(A)
-    hinton(B)
     hinton(solution)
 
 ## Analysing results
@@ -191,26 +194,3 @@ if presults == 1:
     pprint.pprint(sorted_uuser)
     pprint.pprint(sorted_ques)
     pprint.pprint(sorted_ans)
-### Printing the graph file G2
-#print("digraph G {")
-### Printing all user nodes with attributes
-#for key in udict:
-#    print(key + " " + "[label=\"" + udict[key] + "\",shape=box,color=red,quality=" + uqualdict[]"]")
-#
-#for post in plist:
-#    temp = post.split(':')
-#    post_type = temp.pop(1)
-#    if post_type == '1':
-#        # Print ques node
-#        print(temp[0] + " [shape=triangle,color=green]")
-#        # Print user to ques edge
-#        print('"' + temp[1] + '"', '->','"' + temp[0] + '"' + " [label=u2q]")
-#    elif post_type == '2':
-#        #print("Ans")
-#        # Print ans node
-#        print(temp[0] + " [shape=ellipse,color=blue,score=" + temp[3] + "]")
-#        # Print user to ans edge
-#        print('"' + temp[1] + '"', '->','"' + temp[0] + '"' + " [label=u2a,weight=" + temp[3] + "]")
-#        # Print ques to ans edge
-#        print('"' + temp[2] + '"', '->','"' + temp[0] + '"' + " [label=q2a,weight=" + temp[3] + "]")
-#print("}")
