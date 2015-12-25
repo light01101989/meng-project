@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="3" TagName="software" Count="20" ExcerptPostId="244" WikiPostId="243" />
+  <row Id="4" TagName="patents" Count="7" ExcerptPostId="834" WikiPostId="833" />
+  <row Id="5" TagName="codehaus" Count="1" ExcerptPostId="196" WikiPostId="195" />
+  <row Id="6" TagName="project-management" Count="17" ExcerptPostId="98" WikiPostId="97" />
+  <row Id="7" TagName="google-code" Count="2" ExcerptPostId="125" WikiPostId="124" />
+  <row Id="8" TagName="contributor" Count="21" ExcerptPostId="103" WikiPostId="102" />
+  <row Id="9" TagName="collaboration" Count="18" ExcerptPostId="100" WikiPostId="99" />
+  <row Id="10" TagName="forking" Count="14" ExcerptPostId="15" WikiPostId="14" />
+  <row Id="11" TagName="warranty" Count="1" ExcerptPostId="694" WikiPostId="693" />
+  <row Id="12" TagName="law" Count="27" ExcerptPostId="295" WikiPostId="294" />
+  <row Id="13" TagName="development" Count="27" ExcerptPostId="698" WikiPostId="697" />
+  <row Id="17" TagName="issue-tracking" Count="2" />
+  <row Id="18" TagName="support" Count="2" />
+  <row Id="20" TagName="permissive" Count="5" ExcerptPostId="680" WikiPostId="679" />
+  <row Id="21" TagName="apache-2.0" Count="5" ExcerptPostId="194" WikiPostId="193" />
+  <row Id="22" TagName="accessibility" Count="3" />
+  <row Id="24" TagName="gpl" Count="37" ExcerptPostId="269" WikiPostId="268" />
+  <row Id="25" TagName="restrictions" Count="4" ExcerptPostId="1353" WikiPostId="1352" />
+  <row Id="27" TagName="public-domain" Count="6" ExcerptPostId="122" WikiPostId="121" />
+  <row Id="28" TagName="gpl-3" Count="11" ExcerptPostId="200" WikiPostId="199" />
+  <row Id="30" TagName="enforcement" Count="14" ExcerptPostId="674" WikiPostId="673" />
+  <row Id="31" TagName="creative-commons" Count="33" ExcerptPostId="119" WikiPostId="118" />
+  <row Id="32" TagName="monetization" Count="10" ExcerptPostId="127" WikiPostId="126" />
+  <row Id="33" TagName="licensing" Count="116" ExcerptPostId="257" WikiPostId="256" />
+  <row Id="34" TagName="commercial" Count="9" ExcerptPostId="1127" WikiPostId="1126" />
+  <row Id="35" TagName="open-governance-model" Count="1" />
+  <row Id="36" TagName="freedoms" Count="3" />
+  <row Id="37" TagName="customer" Count="1" />
+  <row Id="38" TagName="community" Count="14" ExcerptPostId="696" WikiPostId="695" />
+  <row Id="40" TagName="security" Count="3" />
+  <row Id="41" TagName="human-resources" Count="6" ExcerptPostId="1095" WikiPostId="1094" />
+  <row Id="42" TagName="hardware" Count="12" ExcerptPostId="388" WikiPostId="387" />
+  <row Id="43" TagName="volunteer" Count="1" />
+  <row Id="44" TagName="best-practice" Count="1" />
+  <row Id="47" TagName="proprietary-code" Count="10" ExcerptPostId="385" WikiPostId="384" />
+  <row Id="48" TagName="project-hoster" Count="1" />
+  <row Id="50" TagName="copyleft" Count="23" ExcerptPostId="198" WikiPostId="197" />
+  <row Id="51" TagName="installers" Count="1" />
+  <row Id="52" TagName="software-use" Count="2" />
+  <row Id="53" TagName="cc-by" Count="8" ExcerptPostId="192" WikiPostId="191" />
+  <row Id="55" TagName="distribution" Count="16" ExcerptPostId="497" WikiPostId="496" />
+  <row Id="56" TagName="license-file" Count="6" ExcerptPostId="684" WikiPostId="683" />
+  <row Id="57" TagName="malicious-uses" Count="1" />
+  <row Id="58" TagName="cryptography" Count="1" ExcerptPostId="1236" WikiPostId="1235" />
+  <row Id="59" TagName="encryption" Count="1" />
+  <row Id="60" TagName="bsd" Count="5" ExcerptPostId="1097" WikiPostId="1096" />
+  <row Id="61" TagName="mit" Count="8" ExcerptPostId="1113" WikiPostId="1112" />
+  <row Id="66" TagName="license-creation" Count="1" />
+  <row Id="68" TagName="copyright" Count="17" ExcerptPostId="329" WikiPostId="328" />
+  <row Id="69" TagName="intellectual-property" Count="3" ExcerptPostId="688" WikiPostId="687" />
+  <row Id="70" TagName="osi" Count="5" ExcerptPostId="259" WikiPostId="258" />
+  <row Id="71" TagName="fsf" Count="3" ExcerptPostId="299" WikiPostId="298" />
+  <row Id="72" TagName="terminology" Count="14" ExcerptPostId="917" WikiPostId="916" />
+  <row Id="74" TagName="floss" Count="3" ExcerptPostId="1355" WikiPostId="1354" />
+  <row Id="77" TagName="advertising" Count="1" />
+  <row Id="78" TagName="bundling" Count="2" />
+  <row Id="79" TagName="junkware" Count="1" />
+  <row Id="83" TagName="sustainability" Count="1" />
+  <row Id="84" TagName="website" Count="2" />
+  <row Id="85" TagName="programming" Count="2" />
+  <row Id="86" TagName="philosophy" Count="8" ExcerptPostId="382" WikiPostId="381" />
+  <row Id="88" TagName="free-software" Count="3" ExcerptPostId="425" WikiPostId="424" />
+  <row Id="89" TagName="pull-request" Count="2" />
+  <row Id="90" TagName="operating-system" Count="3" ExcerptPostId="1125" WikiPostId="1124" />
+  <row Id="91" TagName="benefits" Count="2" />
+  <row Id="92" TagName="assets" Count="2" />
+  <row Id="93" TagName="history" Count="10" ExcerptPostId="682" WikiPostId="681" />
+  <row Id="94" TagName="binaries" Count="3" ExcerptPostId="1117" WikiPostId="1116" />
+  <row Id="96" TagName="license-compatibility" Count="21" ExcerptPostId="672" WikiPostId="671" />
+  <row Id="97" TagName="source" Count="2" />
+  <row Id="98" TagName="writing" Count="1" />
+  <row Id="100" TagName="popularity" Count="1" />
+  <row Id="101" TagName="marketing" Count="6" ExcerptPostId="919" WikiPostId="918" />
+  <row Id="102" TagName="license-recommendation" Count="11" ExcerptPostId="678" WikiPostId="677" />
+  <row Id="103" TagName="publishing" Count="5" ExcerptPostId="1271" WikiPostId="1270" />
+  <row Id="104" TagName="cc-cultural-work" Count="1" />
+  <row Id="105" TagName="closed-source" Count="2" />
+  <row Id="107" TagName="robotics" Count="1" />
+  <row Id="109" TagName="finance" Count="4" ExcerptPostId="1203" WikiPostId="1202" />
+  <row Id="110" TagName="cc-by-sa" Count="8" ExcerptPostId="803" WikiPostId="802" />
+  <row Id="111" TagName="contributor-agreements" Count="11" ExcerptPostId="676" WikiPostId="675" />
+  <row Id="113" TagName="paid-software" Count="1" />
+  <row Id="114" TagName="cost" Count="1" />
+  <row Id="116" TagName="business" Count="2" />
+  <row Id="117" TagName="documentation" Count="3" />
+  <row Id="120" TagName="ported" Count="1" />
+  <row Id="121" TagName="non-ported" Count="1" />
+  <row Id="123" TagName="contracts" Count="3" />
+  <row Id="124" TagName="organisation-support" Count="2" />
+  <row Id="126" TagName="exceptions" Count="3" />
+  <row Id="127" TagName="oscon" Count="1" ExcerptPostId="1239" WikiPostId="1238" />
+  <row Id="128" TagName="speaker" Count="1" />
+  <row Id="129" TagName="events" Count="1" />
+  <row Id="131" TagName="trademark" Count="3" />
+  <row Id="135" TagName="ownership" Count="3" ExcerptPostId="690" WikiPostId="689" />
+  <row Id="136" TagName="dfsg" Count="1" ExcerptPostId="561" WikiPostId="560" />
+  <row Id="137" TagName="attribution" Count="12" ExcerptPostId="702" WikiPostId="701" />
+  <row Id="139" TagName="organization" Count="1" />
+  <row Id="142" TagName="gpl-2" Count="4" ExcerptPostId="576" WikiPostId="575" />
+  <row Id="143" TagName="linux-kernel" Count="2" />
+  <row Id="144" TagName="problem-contributor" Count="2" ExcerptPostId="579" WikiPostId="578" />
+  <row Id="146" TagName="proprietary" Count="2" />
+  <row Id="147" TagName="open-cola" Count="1" />
+  <row Id="149" TagName="industry" Count="1" />
+  <row Id="150" TagName="harassment" Count="1" />
+  <row Id="151" TagName="books" Count="1" />
+  <row Id="153" TagName="educational-resources" Count="4" ExcerptPostId="606" WikiPostId="605" />
+  <row Id="154" TagName="awareness" Count="1" />
+  <row Id="155" TagName="inclusion" Count="1" />
+  <row Id="156" TagName="release" Count="1" />
+  <row Id="162" TagName="statistics" Count="3" ExcerptPostId="832" WikiPostId="831" />
+  <row Id="163" TagName="saas" Count="1" />
+  <row Id="164" TagName="wikipedia" Count="1" />
+  <row Id="165" TagName="agpl-3.0" Count="4" />
+  <row Id="167" TagName="source-code" Count="2" />
+  <row Id="168" TagName="multi-licensing" Count="11" ExcerptPostId="692" WikiPostId="691" />
+  <row Id="169" TagName="media" Count="1" />
+  <row Id="170" TagName="source-files" Count="1" />
+  <row Id="171" TagName="share-alike" Count="2" ExcerptPostId="849" WikiPostId="848" />
+  <row Id="172" TagName="relicensing" Count="15" ExcerptPostId="670" WikiPostId="669" />
+  <row Id="173" TagName="personal-use" Count="1" />
+  <row Id="174" TagName="cc-by-nd" Count="2" ExcerptPostId="969" WikiPostId="968" />
+  <row Id="175" TagName="open-source-definition" Count="8" ExcerptPostId="921" WikiPostId="920" />
+  <row Id="176" TagName="free-software-definition" Count="5" ExcerptPostId="971" WikiPostId="970" />
+  <row Id="177" TagName="corporate-ownership" Count="1" />
+  <row Id="178" TagName="sponsorship" Count="1" />
+  <row Id="179" TagName="unlicensed-code" Count="4" ExcerptPostId="686" WikiPostId="685" />
+  <row Id="180" TagName="freeware" Count="2" ExcerptPostId="838" WikiPostId="837" />
+  <row Id="181" TagName="redistribution" Count="1" />
+  <row Id="182" TagName="ethics" Count="1" />
+  <row Id="184" TagName="rpl" Count="1" />
+  <row Id="185" TagName="jurisdictions" Count="1" />
+  <row Id="187" TagName="cc-by-nc-nd" Count="1" ExcerptPostId="1234" WikiPostId="1233" />
+  <row Id="189" TagName="api" Count="5" ExcerptPostId="1269" WikiPostId="1268" />
+  <row Id="190" TagName="implementation" Count="1" />
+  <row Id="191" TagName="irc" Count="1" />
+  <row Id="192" TagName="communication" Count="3" />
+  <row Id="193" TagName="obtaining" Count="1" />
+  <row Id="195" TagName="database" Count="1" />
+  <row Id="197" TagName="gfdl" Count="1" ExcerptPostId="805" WikiPostId="804" />
+  <row Id="198" TagName="localization" Count="1" />
+  <row Id="199" TagName="crowdsourcing" Count="1" />
+  <row Id="200" TagName="career" Count="1" />
+  <row Id="201" TagName="students" Count="1" />
+  <row Id="203" TagName="gsoc" Count="1" ExcerptPostId="1077" WikiPostId="1076" />
+  <row Id="205" TagName="etiquette" Count="1" />
+  <row Id="206" TagName="testing" Count="1" />
+  <row Id="207" TagName="gamification" Count="1" ExcerptPostId="1243" WikiPostId="1242" />
+  <row Id="208" TagName="gnu" Count="3" ExcerptPostId="909" WikiPostId="908" />
+  <row Id="209" TagName="dmca" Count="1" ExcerptPostId="1079" WikiPostId="1078" />
+  <row Id="210" TagName="open-definition" Count="1" />
+  <row Id="211" TagName="open-knowledge" Count="1" />
+  <row Id="212" TagName="open-data" Count="1" />
+  <row Id="213" TagName="debian" Count="1" />
+  <row Id="214" TagName="entertainment" Count="2" />
+  <row Id="215" TagName="movie" Count="2" ExcerptPostId="1175" WikiPostId="1174" />
+  <row Id="216" TagName="license-notice" Count="4" />
+  <row Id="217" TagName="linux-distribution" Count="3" ExcerptPostId="1093" WikiPostId="1092" />
+  <row Id="220" TagName="linked-libraries" Count="5" ExcerptPostId="1591" WikiPostId="1590" />
+  <row Id="222" TagName="novena" Count="1" />
+  <row Id="223" TagName="drm" Count="4" ExcerptPostId="1123" WikiPostId="1122" />
+  <row Id="224" TagName="transparency" Count="1" />
+  <row Id="225" TagName="notices" Count="1" />
+  <row Id="226" TagName="github" Count="5" ExcerptPostId="1308" WikiPostId="1307" />
+  <row Id="227" TagName="use-cases" Count="1" />
+  <row Id="228" TagName="news" Count="1" />
+  <row Id="229" TagName="file-formats" Count="2" />
+  <row Id="230" TagName="derivative-works" Count="14" ExcerptPostId="1589" WikiPostId="1588" />
+  <row Id="231" TagName="plugins" Count="2" />
+  <row Id="232" TagName="cc-by-nc" Count="1" />
+  <row Id="233" TagName="non-commercial" Count="1" />
+  <row Id="236" TagName="standards" Count="1" />
+  <row Id="237" TagName="osr" Count="1" ExcerptPostId="1293" WikiPostId="1292" />
+  <row Id="238" TagName="quality-assurance" Count="1" />
+  <row Id="239" TagName="feature-requests" Count="2" />
+  <row Id="242" TagName="epl" Count="1" ExcerptPostId="1338" WikiPostId="1337" />
+  <row Id="243" TagName="java" Count="1" />
+  <row Id="244" TagName="lgpl" Count="4" />
+  <row Id="245" TagName="simpl-2.0" Count="1" />
+  <row Id="246" TagName="wtfpl" Count="1" />
+  <row Id="247" TagName="non-discrimination" Count="1" />
+  <row Id="248" TagName="cc0" Count="2" />
+  <row Id="249" TagName="royalties" Count="1" />
+  <row Id="251" TagName="end-user-agreements" Count="1" />
+  <row Id="252" TagName="crayon-licenses" Count="1" ExcerptPostId="1450" WikiPostId="1449" />
+  <row Id="254" TagName="version-control-systems" Count="2" />
+  <row Id="255" TagName="cc-by-nc-sa" Count="1" />
+  <row Id="256" TagName="eupl" Count="1" />
+  <row Id="258" TagName="code-snippets" Count="1" ExcerptPostId="1533" WikiPostId="1532" />
+  <row Id="259" TagName="interactive-environments" Count="1" />
+</tags>

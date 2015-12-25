@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, graphicx, float}
+\allowdisplaybreaks
+
+\title{Wireless Communication HW5}
+\author{Arjun Jauhari(aj526)}
+\date{8 November 2015}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+SNR of OFDM system:\\
+\begin{flalign*}
+    &y_w = \lambda_w x_w + n_w ; w = 0,1,...,W-1 &\\
+    &\lambda_w = \frac{1}{\sqrt{W}} \sum_{l=0}^{L-1} h_l exp\left(\frac{-j2\pi}{W}lw\right) &\\
+    &h_l \sim \mathcal{CN} (0,1) ; n_w \sim \mathcal{CN} (0,N_0) ; W = 64 \\
+    &SNR = \frac{\mathbb{E} \left[\|\mathbf{\lambda x}\|^2\right]}{\mathbb{E} \left[\|\mathbf{n}\|^2\right]} & \\
+\end{flalign*}
+
+\begin{flalign*}
+    \mathbb{E} \left[\|\mathbf{\lambda x}\|^2\right] &= \mathbb{E} \left[\sum_{w=0}^{W-1}|\lambda_w x_w|^2\right] &\\
+                                                     &= \sum_{w=0}^{W-1} \mathbb{E} \left[|\lambda_w x_w|^2\right] &\\
+                                                     &= \sum_{w=0}^{W-1} \mathbb{E} \left[|\lambda_w|^2\right] \mathbb{E} \left[|x_w|^2\right]&\\
+                                                     &= E_s \sum_{w=0}^{W-1} \mathbb{E} \left[|\lambda_w|^2\right]&\\
+                                                     &= E_s \sum_{w=0}^{W-1} \mathbb{E} \left[|\frac{1}{\sqrt{W}} \sum_{l=0}^{L-1} h_l exp\left(\frac{-j2\pi}{W}lw\right)|^2\right]&\\
+                                                     &= E_s \frac{1}{W} \sum_{w=0}^{W-1} \mathbb{E} \left[\sum_{l=0}^{L-1} |h_l|^2\right]&\\
+                                                     &= E_s \frac{1}{W} \sum_{w=0}^{W-1} L &\\
+                                                     &= E_s L &\\
+\end{flalign*}
+
+\begin{flushleft}
+$\mathbb{E} \left[\|\mathbf{n}\|^2\right] = W N_0 $ \\
+\end{flushleft}
+
+\begin{flushleft}
+Therefore,
+$SNR = \frac{L E_s}{W N_0} $ \\
+\end{flushleft}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{HW5_Q1.eps}
+\caption{Problem 1}
+\label{fig:prob1}
+\end{figure}
+
+\begin{flushleft}
+    Part 1: From plot it can be seen that Diversity is 1 for simple OFDM case. \\
+    Part 2: The error rate performance of OFDM with repitition coding is 2-3dB better than simple OFDM. \\
+    Part 3: There is considerable performance gain in OFDM with interleaved repetition coding. \\
+\end{flushleft}
+
+\section*{Problem 2}
+$v \sim \mathcal{CN} (m,\sigma^2)$
+
+Given random variables $X_1, ..., X_n$  each with variance $\sigma^2$, $Var(\bar{X}_n) = \frac{\sigma^2}{n}$.
+
+\begin{proof}
+\begin{equation*}
+\begin{split}
+Var(\bar{X}_n) &= Var\left(\frac{X_1, ..., X_n}{n}\right) \\
+&= (\frac{1}{n})^2 \sum_{i=1}^{n} \sigma_i^2 \\
+&= \frac{\sigma^2}{n} \\
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Integrals}
+\begin{center}
+\setlength{\tabcolsep}{1cm}
+\def\arraystretch{2.5}
+\begin{tabular}{c|c}
+Integral & Evaluates to... \\
+\hline
+$\displaystyle \int_{a}^{b} k dx$ & $kx+c$
+\end{tabular}
+\end{center}
+
+\section{Matrices}
+\subsection{ The identity matrix}
+\begin{itemize}
+\item $ \mathbf{I}_{2 \times 2} = \left[
+    \begin{array}{cc}
+     1 & 0 \\
+     0 & 1
+    \end{array} \right] $
+\item Symmetric and idempotent
+\end{itemize}
+\subsection{Matrix programming in MATLAB}
+\begin{verbatim}
+    B = [7, 8; 9, 10];
+    
+    % Find eigenvalues
+    eB = eig(B)
+\end{verbatim}
+
+
+\end{document}
+

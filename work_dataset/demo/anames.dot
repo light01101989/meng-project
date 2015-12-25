@@ -1,0 +1,9 @@
+digraph G {
+   "Meyer,FrankNicholas" -> "Cunningham,IsabelShipley";
+   "Meyer,FrankNicholas" -> "UnitedStatesBureauofPlantIndustry";
+   "Meyer,FrankNicholas" -> "UnitedStatesOfficeofForeignSeedandPlantIntroduction";
+   "Meyer,FrankNicholas" -> "Fairchild,David";
+   "Meyer,FrankNicholas" -> "Barrie,JamesMatthew";
+   "Wilson,ErnestHenry" -> "Meyer,FrankNicholas";
+   "Meyer,FrankNicholas" -> "Rock,JosephF.";
+}
