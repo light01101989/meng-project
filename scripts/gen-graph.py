@@ -2,8 +2,10 @@
 import subprocess
 import pprint
 import numpy as np
+import matplotlib.pyplot as plt
 from hinton import hinton
 import operator
+import precisionAtK as pak
 
 #Parsing the xml file
 def get_list(cmd):
@@ -18,7 +20,9 @@ def get_list(cmd):
 
 pflag = 0   # Flag to enable verbose printing
 hinplot = 0 # Flag to enable hinton plots
-presults = 1    # Flag to print sorted results
+presults = 0    # Flag to print sorted results
+histplot = 1    # Flag to print histogram
+doPatK = 1      # Flag for plotting Precision at K
 
 ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
 plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
@@ -173,19 +177,27 @@ if hinplot == 1:
 ans = {}
 ques = {}
 uuser = {}
+userQ = {}
+anslist = []
+queslist = []
+uuserlist = []
 ## temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId]
 for post in plist:
     temp = post.split(':')
     post_type = temp.pop(1)
     if post_type == '2':
         ans[temp[0]] = out[temp[0]]
+        anslist.append(out[temp[0]])
     elif post_type == '1':
         ques[temp[0]] = out[temp[0]]
+        queslist.append(out[temp[0]])
 
 for user in ulist:
     indx = user.split(':')[0]
     name = user.split(':')[1]
     uuser[name] = out[indx]
+    uuserlist.append(out[indx])
+    userQ[indx] = out[indx]
 
 sorted_ans = sorted(ans.items(), key=operator.itemgetter(1))
 sorted_ques = sorted(ques.items(), key=operator.itemgetter(1))
@@ -194,3 +206,45 @@ if presults == 1:
     pprint.pprint(sorted_uuser)
     pprint.pprint(sorted_ques)
     pprint.pprint(sorted_ans)
+
+## Histogram
+if histplot == 1:
+    userhist = np.histogram(uuserlist)
+    queshist = np.histogram(queslist)
+    plt.figure(1)
+    plt.plot(userhist[1][1:], userhist[0])
+    plt.xlabel('User Quality')
+    plt.ylabel('Number of Users')
+    plt.title('User Quality Histogram')
+    plt.savefig('UQualHist.png')
+    plt.figure(2)
+    plt.plot(queshist[1][1:], queshist[0])
+    plt.xlabel('Ques Quality')
+    plt.ylabel('Number of Ques')
+    plt.title('Ques Quality Histogram')
+    plt.savefig('QQualHist.png')
+    print("User:")
+    pprint.pprint(userhist)
+    print("Ques:")
+    pprint.pprint(queshist)
+
+## Precision at K
+if doPatK == 1:
+    ## sort/rank userQ by Quality from linear model
+    sorted_userQ = sorted(userQ.items(), key=operator.itemgetter(1), reverse=True)
+    ## sort/rank user by reputation
+    sorted_repu = sorted(repu.items(), key=operator.itemgetter(1), reverse=True)
+    rankLS = [int(v[0]) for v in sorted_userQ]
+    rankRepu = [int(v[0]) for v in sorted_repu]
+    #pprint.pprint(rankLS)
+    #pprint.pprint(rankRepu)
+    ## compute precisionAtK
+    PatK = pak.precisionAtK(np.array(rankLS), np.array(rankRepu), 20)
+    #pprint.pprint(PatK)
+    plt.figure(3)
+    plt.plot(PatK[1], PatK[0])
+    plt.xlabel('K')
+    plt.ylabel('Precision at K')
+    plt.title('Precision at K')
+    plt.savefig('PatK.png')
+    plt.show()

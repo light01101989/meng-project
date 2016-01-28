@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="1" TagName="line-numbers" Count="13" />
+  <row Id="2" TagName="indentation" Count="29" ExcerptPostId="3239" WikiPostId="3238" />
+  <row Id="6" TagName="macro" Count="15" ExcerptPostId="856" WikiPostId="855" />
+  <row Id="7" TagName="text-generation" Count="7" />
+  <row Id="8" TagName="android" Count="1" />
+  <row Id="12" TagName="search" Count="43" ExcerptPostId="4216" WikiPostId="4215" />
+  <row Id="18" TagName="cursor-movement" Count="60" ExcerptPostId="4214" WikiPostId="4213" />
+  <row Id="19" TagName="vimrc" Count="80" ExcerptPostId="316" WikiPostId="315" />
+  <row Id="22" TagName="syntax-highlighting" Count="49" ExcerptPostId="2070" WikiPostId="2069" />
+  <row Id="23" TagName="neovim" Count="10" ExcerptPostId="597" WikiPostId="596" />
+  <row Id="24" TagName="folding" Count="23" ExcerptPostId="2112" WikiPostId="2111" />
+  <row Id="27" TagName="filesystem" Count="21" ExcerptPostId="2040" WikiPostId="2039" />
+  <row Id="28" TagName="filetype" Count="18" ExcerptPostId="4321" WikiPostId="4320" />
+  <row Id="30" TagName="split" Count="28" ExcerptPostId="828" WikiPostId="827" />
+  <row Id="32" TagName="save" Count="28" ExcerptPostId="1956" WikiPostId="1955" />
+  <row Id="34" TagName="buffers" Count="39" ExcerptPostId="643" WikiPostId="642" />
+  <row Id="35" TagName="crash-recovery" Count="3" />
+  <row Id="37" TagName="autocompletion" Count="39" ExcerptPostId="2154" WikiPostId="2153" />
+  <row Id="40" TagName="vimscript" Count="94" ExcerptPostId="272" WikiPostId="271" />
+  <row Id="43" TagName="large-documents" Count="3" />
+  <row Id="44" TagName="count" Count="5" ExcerptPostId="2712" WikiPostId="2711" />
+  <row Id="45" TagName="abbreviations" Count="6" />
+  <row Id="46" TagName="wrapping" Count="13" ExcerptPostId="4329" WikiPostId="4328" />
+  <row Id="48" TagName="cut-copy-paste" Count="42" ExcerptPostId="817" WikiPostId="816" />
+  <row Id="50" TagName="sessions" Count="6" />
+  <row Id="51" TagName="help-system" Count="18" ExcerptPostId="115" WikiPostId="114" />
+  <row Id="53" TagName="spell-checking" Count="14" ExcerptPostId="314" WikiPostId="313" />
+  <row Id="55" TagName="clientserver" Count="5" ExcerptPostId="4226" WikiPostId="4225" />
+  <row Id="56" TagName="visual-mode" Count="31" ExcerptPostId="2152" WikiPostId="2151" />
+  <row Id="58" TagName="register" Count="19" ExcerptPostId="645" WikiPostId="644" />
+  <row Id="61" TagName="multiple-files" Count="21" ExcerptPostId="3041" WikiPostId="3040" />
+  <row Id="62" TagName="ide" Count="20" ExcerptPostId="160" WikiPostId="159" />
+  <row Id="63" TagName="highlight" Count="17" ExcerptPostId="4224" WikiPostId="4223" />
+  <row Id="68" TagName="substitute" Count="30" ExcerptPostId="1933" WikiPostId="1932" />
+  <row Id="70" TagName="swap-file" Count="9" ExcerptPostId="4206" WikiPostId="4205" />
+  <row Id="72" TagName="macvim" Count="13" ExcerptPostId="4204" WikiPostId="4203" />
+  <row Id="73" TagName="performance" Count="8" />
+  <row Id="77" TagName="command-line" Count="54" ExcerptPostId="378" WikiPostId="377" />
+  <row Id="79" TagName="plugin-fuzzyfinder" Count="1" />
+  <row Id="80" TagName="vimdiff" Count="23" ExcerptPostId="224" WikiPostId="223" />
+  <row Id="81" TagName="mouse" Count="7" ExcerptPostId="4341" WikiPostId="4340" />
+  <row Id="82" TagName="scrolling" Count="10" />
+  <row Id="83" TagName="os-clipboard" Count="16" ExcerptPostId="384" WikiPostId="383" />
+  <row Id="84" TagName="x11" Count="7" ExcerptPostId="826" WikiPostId="825" />
+  <row Id="85" TagName="terminal" Count="32" ExcerptPostId="858" WikiPostId="857" />
+  <row Id="87" TagName="keyboard-layout" Count="8" />
+  <row Id="88" TagName="key-bindings" Count="98" ExcerptPostId="2091" WikiPostId="2090" />
+  <row Id="90" TagName="tmux" Count="4" />
+  <row Id="91" TagName="autocmd" Count="22" ExcerptPostId="263" WikiPostId="262" />
+  <row Id="92" TagName="plugin-vim-latex" Count="7" ExcerptPostId="267" WikiPostId="266" />
+  <row Id="93" TagName="plugin-system" Count="19" ExcerptPostId="337" WikiPostId="336" />
+  <row Id="94" TagName="tags" Count="14" ExcerptPostId="3043" WikiPostId="3042" />
+  <row Id="96" TagName="plugin-managers" Count="4" />
+  <row Id="97" TagName="plugin-vundle" Count="5" ExcerptPostId="4088" WikiPostId="4087" />
+  <row Id="103" TagName="insert-mode" Count="38" ExcerptPostId="590" WikiPostId="589" />
+  <row Id="104" TagName="status-line" Count="15" ExcerptPostId="4325" WikiPostId="4324" />
+  <row Id="106" TagName="file-operations" Count="7" />
+  <row Id="107" TagName="tabbed-user-interface" Count="15" ExcerptPostId="4327" WikiPostId="4326" />
+  <row Id="108" TagName="external-command" Count="35" ExcerptPostId="854" WikiPostId="853" />
+  <row Id="109" TagName="options" Count="15" ExcerptPostId="380" WikiPostId="379" />
+  <row Id="111" TagName="undocumented-behaviour" Count="2" />
+  <row Id="112" TagName="nvi" Count="4" ExcerptPostId="355" WikiPostId="354" />
+  <row Id="114" TagName="binary-file" Count="8" ExcerptPostId="4084" WikiPostId="4083" />
+  <row Id="117" TagName="command-history" Count="11" />
+  <row Id="118" TagName="persistent-state" Count="13" />
+  <row Id="119" TagName="invocation" Count="17" ExcerptPostId="2417" WikiPostId="2416" />
+  <row Id="120" TagName="tables" Count="1" />
+  <row Id="121" TagName="word-processing" Count="7" ExcerptPostId="559" WikiPostId="558" />
+  <row Id="122" TagName="security" Count="4" />
+  <row Id="123" TagName="cryptmethod" Count="2" />
+  <row Id="125" TagName="colorscheme" Count="23" ExcerptPostId="2909" WikiPostId="2908" />
+  <row Id="126" TagName="alignment" Count="9" />
+  <row Id="127" TagName="ascii-art" Count="4" />
+  <row Id="128" TagName="window-management" Count="2" ExcerptPostId="782" WikiPostId="781" />
+  <row Id="129" TagName="normal-mode" Count="18" ExcerptPostId="635" WikiPostId="634" />
+  <row Id="130" TagName="plugin-vimwiki" Count="2" />
+  <row Id="131" TagName="vimscript-python" Count="6" ExcerptPostId="1990" WikiPostId="1989" />
+  <row Id="133" TagName="markup" Count="3" />
+  <row Id="137" TagName="escape" Count="5" />
+  <row Id="138" TagName="habit-breaking" Count="2" />
+  <row Id="139" TagName="unix" Count="6" ExcerptPostId="824" WikiPostId="823" />
+  <row Id="140" TagName="undo-redo" Count="12" ExcerptPostId="4333" WikiPostId="4332" />
+  <row Id="141" TagName="comments" Count="8" ExcerptPostId="3245" WikiPostId="3244" />
+  <row Id="144" TagName="whitespace" Count="11" />
+  <row Id="145" TagName="tab-characters" Count="12" ExcerptPostId="4331" WikiPostId="4330" />
+  <row Id="146" TagName="linux" Count="16" ExcerptPostId="4222" WikiPostId="4221" />
+  <row Id="147" TagName="quit" Count="7" />
+  <row Id="151" TagName="gvim" Count="31" ExcerptPostId="600" WikiPostId="599" />
+  <row Id="152" TagName="permissions" Count="2" />
+  <row Id="153" TagName="load" Count="11" ExcerptPostId="2038" WikiPostId="2037" />
+  <row Id="154" TagName="line-breaks" Count="16" />
+  <row Id="158" TagName="vimball" Count="2" />
+  <row Id="161" TagName="jumplist" Count="4" />
+  <row Id="168" TagName="file-formats" Count="3" />
+  <row Id="171" TagName="command-line-window" Count="3" ExcerptPostId="557" WikiPostId="556" />
+  <row Id="172" TagName="ex-mode" Count="13" ExcerptPostId="2698" WikiPostId="2697" />
+  <row Id="173" TagName="filetype-php" Count="3" />
+  <row Id="174" TagName="filetype-c++" Count="8" />
+  <row Id="175" TagName="filetype-c" Count="4" />
+  <row Id="176" TagName="delimiter-matching" Count="5" />
+  <row Id="177" TagName="filetype-markdown" Count="4" />
+  <row Id="179" TagName="licensing" Count="1" />
+  <row Id="180" TagName="accessibility" Count="1" />
+  <row Id="181" TagName="input-devices" Count="2" ExcerptPostId="2218" WikiPostId="2217" />
+  <row Id="183" TagName="equalprg" Count="1" />
+  <row Id="186" TagName="filetype-python" Count="6" ExcerptPostId="1992" WikiPostId="1991" />
+  <row Id="189" TagName="microsoft-windows" Count="24" ExcerptPostId="4218" WikiPostId="4217" />
+  <row Id="190" TagName="plugin-emmet-vim" Count="2" />
+  <row Id="191" TagName="font" Count="6" />
+  <row Id="192" TagName="regular-expression" Count="44" ExcerptPostId="2126" WikiPostId="2125" />
+  <row Id="193" TagName="cscope" Count="2" ExcerptPostId="608" WikiPostId="607" />
+  <row Id="198" TagName="filetype-javascript" Count="9" />
+  <row Id="207" TagName="startup" Count="13" ExcerptPostId="640" WikiPostId="639" />
+  <row Id="208" TagName="filetype-git" Count="3" />
+  <row Id="209" TagName="version-control-systems" Count="3" ExcerptPostId="672" WikiPostId="671" />
+  <row Id="210" TagName="refactor" Count="1" ExcerptPostId="647" WikiPostId="646" />
+  <row Id="212" TagName="plugin-transpose-words" Count="1" />
+  <row Id="213" TagName="merge" Count="2" />
+  <row Id="216" TagName="letter-case" Count="2" />
+  <row Id="219" TagName="filetype-xml" Count="5" />
+  <row Id="220" TagName="enumerate" Count="2" />
+  <row Id="224" TagName="filetype-html" Count="11" />
+  <row Id="227" TagName="plugin-nerdtree" Count="9" ExcerptPostId="3444" WikiPostId="3443" />
+  <row Id="228" TagName="replace" Count="13" ExcerptPostId="1931" WikiPostId="1930" />
+  <row Id="229" TagName="repeated-commands" Count="8" />
+  <row Id="233" TagName="netrw" Count="19" ExcerptPostId="3450" WikiPostId="3449" />
+  <row Id="235" TagName="filetype-tex" Count="13" ExcerptPostId="3415" WikiPostId="3414" />
+  <row Id="238" TagName="plugin-taglist" Count="1" />
+  <row Id="241" TagName="mark" Count="4" />
+  <row Id="243" TagName="backup" Count="2" />
+  <row Id="244" TagName="quickfix" Count="9" ExcerptPostId="4339" WikiPostId="4338" />
+  <row Id="247" TagName="terminology" Count="3" />
+  <row Id="258" TagName="filetype-java" Count="1" />
+  <row Id="259" TagName="working-directory" Count="7" />
+  <row Id="260" TagName="history-of" Count="8" ExcerptPostId="1946" WikiPostId="1945" />
+  <row Id="261" TagName="vim-windows" Count="29" ExcerptPostId="1944" WikiPostId="1943" />
+  <row Id="263" TagName="crash" Count="1" ExcerptPostId="1954" WikiPostId="1953" />
+  <row Id="264" TagName="viemu" Count="1" />
+  <row Id="268" TagName="installing" Count="7" ExcerptPostId="2652" WikiPostId="2651" />
+  <row Id="270" TagName="linux-fedora" Count="1" />
+  <row Id="271" TagName="dictionary" Count="1" />
+  <row Id="272" TagName="git" Count="11" ExcerptPostId="4335" WikiPostId="4334" />
+  <row Id="273" TagName="ctags" Count="10" ExcerptPostId="2114" WikiPostId="2113" />
+  <row Id="274" TagName="original-vi" Count="1" ExcerptPostId="2102" WikiPostId="2101" />
+  <row Id="275" TagName="rearrangement" Count="2" />
+  <row Id="276" TagName="filetype-perl" Count="1" />
+  <row Id="278" TagName="unicode" Count="12" ExcerptPostId="4337" WikiPostId="4336" />
+  <row Id="280" TagName="input-methods" Count="3" ExcerptPostId="2216" WikiPostId="2215" />
+  <row Id="284" TagName="plugin-zip" Count="1" ExcerptPostId="2226" WikiPostId="2225" />
+  <row Id="287" TagName="filetype-pascal" Count="1" />
+  <row Id="290" TagName="osx" Count="7" ExcerptPostId="4220" WikiPostId="4219" />
+  <row Id="293" TagName="makeprg" Count="3" />
+  <row Id="294" TagName="path" Count="5" />
+  <row Id="295" TagName="iterm2" Count="2" />
+  <row Id="297" TagName="plugin-tar" Count="1" />
+  <row Id="298" TagName="filetype-vhdl" Count="1" />
+  <row Id="299" TagName="plugin-c.vim" Count="2" />
+  <row Id="300" TagName="error" Count="8" ExcerptPostId="2392" WikiPostId="2391" />
+  <row Id="302" TagName="plugin-ctrlp" Count="7" ExcerptPostId="3442" WikiPostId="3441" />
+  <row Id="304" TagName="plugin-vim-jsbeautify" Count="1" />
+  <row Id="305" TagName="version" Count="5" />
+  <row Id="308" TagName="formatting" Count="18" ExcerptPostId="4323" WikiPostId="4322" />
+  <row Id="310" TagName="plugin-ternjs" Count="1" />
+  <row Id="311" TagName="plugin-you-complete-me" Count="5" ExcerptPostId="2507" WikiPostId="2506" />
+  <row Id="313" TagName="filetype-sh" Count="1" />
+  <row Id="314" TagName="printing" Count="2" />
+  <row Id="315" TagName="plugin-vim-airline" Count="5" ExcerptPostId="2641" WikiPostId="2640" />
+  <row Id="316" TagName="plugin-fugitive" Count="3" ExcerptPostId="2748" WikiPostId="2747" />
+  <row Id="320" TagName="modeline" Count="5" ExcerptPostId="2643" WikiPostId="2642" />
+  <row Id="321" TagName="plugin-camelcasemotion" Count="1" />
+  <row Id="324" TagName="wildmenu" Count="3" />
+  <row Id="328" TagName="plugin-conque" Count="1" />
+  <row Id="329" TagName="plugin-vimshell" Count="2" />
+  <row Id="330" TagName="plugin-tagbar" Count="2" ExcerptPostId="2639" WikiPostId="2638" />
+  <row Id="332" TagName="plugin-vim-surround" Count="3" ExcerptPostId="3446" WikiPostId="3445" />
+  <row Id="334" TagName="plugin-powerline" Count="1" />
+  <row Id="336" TagName="plugin-ultisnips" Count="5" ExcerptPostId="4209" WikiPostId="4208" />
+  <row Id="339" TagName="shortmess" Count="1" />
+  <row Id="340" TagName="filetype-lua" Count="1" />
+  <row Id="344" TagName="include" Count="2" />
+  <row Id="345" TagName="plugin-node" Count="1" />
+  <row Id="346" TagName="plugin-atp" Count="2" />
+  <row Id="347" TagName="arithmetic" Count="1" />
+  <row Id="348" TagName="plugin-syntastic" Count="4" ExcerptPostId="4229" WikiPostId="4228" />
+  <row Id="349" TagName="plugin-python-mode" Count="1" />
+  <row Id="350" TagName="signs" Count="1" ExcerptPostId="3082" WikiPostId="3081" />
+  <row Id="354" TagName="previewing" Count="1" ExcerptPostId="2966" WikiPostId="2965" />
+  <row Id="355" TagName="encoding" Count="6" ExcerptPostId="3243" WikiPostId="3242" />
+  <row Id="356" TagName="bash" Count="4" />
+  <row Id="357" TagName="ex-command" Count="2" ExcerptPostId="3012" WikiPostId="3011" />
+  <row Id="358" TagName="silent-mode" Count="1" ExcerptPostId="3010" WikiPostId="3009" />
+  <row Id="359" TagName="linux-arch" Count="1" />
+  <row Id="360" TagName="plugin-spf13" Count="1" />
+  <row Id="361" TagName="plugin-neosnippet.vim" Count="1" />
+  <row Id="363" TagName="grammar-checking" Count="1" />
+  <row Id="364" TagName="plugin-unite.vim" Count="1" ExcerptPostId="3096" WikiPostId="3095" />
+  <row Id="365" TagName="cygwin" Count="2" />
+  <row Id="367" TagName="plugin-ag.vim" Count="1" ExcerptPostId="3147" WikiPostId="3146" />
+  <row Id="369" TagName="plugin-autoformat" Count="1" />
+  <row Id="370" TagName="xmllint" Count="1" />
+  <row Id="372" TagName="the-silver-searcher" Count="1" ExcerptPostId="3241" WikiPostId="3240" />
+  <row Id="375" TagName="plugin-vim-jsx" Count="1" ExcerptPostId="3248" WikiPostId="3247" />
+  <row Id="376" TagName="plugin-dispatch" Count="1" ExcerptPostId="3252" WikiPostId="3251" />
+  <row Id="386" TagName="plugin-jedi-vim" Count="3" ExcerptPostId="3448" WikiPostId="3447" />
+  <row Id="388" TagName="plugin-lid.vim" Count="1" ExcerptPostId="3440" WikiPostId="3439" />
+  <row Id="389" TagName="pdf" Count="1" />
+  <row Id="390" TagName="filenames" Count="1" />
+  <row Id="392" TagName="vimscript-lua" Count="1" ExcerptPostId="3745" WikiPostId="3744" />
+  <row Id="393" TagName="history" Count="1" />
+  <row Id="394" TagName="mru" Count="1" />
+  <row Id="395" TagName="plugin-solarized" Count="3" />
+  <row Id="397" TagName="plugin-neocompcache" Count="1" />
+  <row Id="398" TagName="cursor" Count="2" />
+  <row Id="400" TagName="cursor-motions" Count="24" ExcerptPostId="3805" WikiPostId="3804" />
+  <row Id="401" TagName="plugin-omnisharp-vim" Count="1" />
+  <row Id="402" TagName="filetype-c#" Count="1" />
+  <row Id="405" TagName="filetype-ruby" Count="2" />
+  <row Id="406" TagName="putty" Count="1" ExcerptPostId="4202" WikiPostId="4201" />
+  <row Id="408" TagName="vim-development" Count="1" ExcerptPostId="3942" WikiPostId="3941" />
+  <row Id="410" TagName="plugin-snipmate" Count="1" />
+  <row Id="411" TagName="plugin-rope" Count="1" ExcerptPostId="4110" WikiPostId="4109" />
+  <row Id="412" TagName="scratch-buffer" Count="1" />
+  <row Id="416" TagName="digraphs" Count="2" ExcerptPostId="4189" WikiPostId="4188" />
+  <row Id="417" TagName="line-continuation" Count="1" />
+  <row Id="418" TagName="source" Count="1" />
+  <row Id="419" TagName="callback" Count="1" />
+  <row Id="420" TagName="multiple-lines" Count="1" />
+  <row Id="421" TagName="hidden-buffers" Count="1" />
+</tags>
