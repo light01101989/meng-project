@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from hinton import hinton
 import operator
 import precisionAtK as pak
+import datacleanup as dc
 
 #Parsing the xml file
 def get_list(cmd):
@@ -18,14 +19,19 @@ def get_list(cmd):
     out_list.remove('')
     return out_list
 
+lappy = 0
 pflag = 0   # Flag to enable verbose printing
 hinplot = 0 # Flag to enable hinton plots
-presults = 0    # Flag to print sorted results
+presults = 1    # Flag to print sorted results
 histplot = 1    # Flag to print histogram
 doPatK = 1      # Flag for plotting Precision at K
+dataClean = 0   # Flag for cleaning up the data(PatK should also be enabled)
 
 ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
-plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
+if lappy == 1:
+    plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
+else:
+    plist = get_list('/home/molnargroup/Music/project/scripts/get-post-owner-user-id.sh')
 ## Remove all the owner less posts
 for i in range(len(plist)):
     temp = plist[i].split(':')
@@ -38,7 +44,10 @@ if pflag == 1:
     print(plist)
 
 ## Get list for Userid:displayname:Reputation
-ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-user-id-name.sh')
+if lappy == 1:
+    ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-user-id-name.sh')
+else:
+    ulist = get_list('/home/molnargroup/Music/project/scripts/get-user-id-name.sh')
 ## Insert a Dummy user with Id '-2'
 ulist.append('-2:Dummy:0')
 if pflag == 1:
@@ -248,3 +257,10 @@ if doPatK == 1:
     plt.title('Precision at K')
     plt.savefig('PatK.png')
     plt.show()
+
+## Data Cleanup
+if dataClean == 1:
+    validUser = np.array(rankLS);
+    validUser = validUser[:80]  # FIXME
+    # Call dataCleanup function with validUser array
+    dc.dataCleanup(validUser);
