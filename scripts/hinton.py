@@ -12,7 +12,7 @@ def _blob(x,y,area,colour):
     ycorners = N.array([y - hs, y - hs, y + hs, y + hs])
     P.fill(xcorners, ycorners, colour, edgecolor=colour)
 
-def hinton(W, maxWeight=None):
+def hinton(W, name, maxWeight=None):
     """
     Draws a Hinton diagram for visualizing a weight matrix. 
     Temporarily disables matplotlib interactive mode if it is on, 
@@ -40,4 +40,5 @@ def hinton(W, maxWeight=None):
                 _blob(_x - 0.5, height - _y + 0.5, min(1,-w/maxWeight),'black')
     if reenable:
         P.ion()
+    P.savefig('hinton' + name + '.png')
     P.show()

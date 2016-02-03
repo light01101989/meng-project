@@ -21,17 +21,24 @@ def get_list(cmd):
 
 lappy = 0
 pflag = 0   # Flag to enable verbose printing
-hinplot = 0 # Flag to enable hinton plots
+hinplot = 1 # Flag to enable hinton plots
 presults = 1    # Flag to print sorted results
 histplot = 1    # Flag to print histogram
 doPatK = 1      # Flag for plotting Precision at K
 dataClean = 0   # Flag for cleaning up the data(PatK should also be enabled)
+newFiles = 0    # Flag to read from new cleaned up files
 
 ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
 if lappy == 1:
-    plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
+    if newFiles == 1:
+        plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-newpost-owner-user-id.sh')
+    else:
+        plist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-post-owner-user-id.sh')
 else:
-    plist = get_list('/home/molnargroup/Music/project/scripts/get-post-owner-user-id.sh')
+    if newFiles == 1:
+        plist = get_list('/home/molnargroup/Music/project/scripts/get-newpost-owner-user-id.sh')
+    else:
+        plist = get_list('/home/molnargroup/Music/project/scripts/get-post-owner-user-id.sh')
 ## Remove all the owner less posts
 for i in range(len(plist)):
     temp = plist[i].split(':')
@@ -45,9 +52,15 @@ if pflag == 1:
 
 ## Get list for Userid:displayname:Reputation
 if lappy == 1:
-    ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-user-id-name.sh')
+    if newFiles == 1:
+        ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-newuser-id-name.sh')
+    else:
+        ulist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-user-id-name.sh')
 else:
-    ulist = get_list('/home/molnargroup/Music/project/scripts/get-user-id-name.sh')
+    if newFiles == 1:
+        ulist = get_list('/home/molnargroup/Music/project/scripts/get-newuser-id-name.sh')
+    else:
+        ulist = get_list('/home/molnargroup/Music/project/scripts/get-user-id-name.sh')
 ## Insert a Dummy user with Id '-2'
 ulist.append('-2:Dummy:0')
 if pflag == 1:
@@ -173,14 +186,14 @@ for user in ulist:
     idx += 1
 
 if hinplot == 1:
-    hinton(A)
-    hinton(B)
+    hinton(A, 'Amat')
+    hinton(B, 'Bvec')
 solution = np.linalg.solve(A,B)
 out = dict(zip(x_theory,solution))
 #pprint.pprint(out)
 
 if hinplot == 1:
-    hinton(solution)
+    hinton(solution, 'Sol')
 
 ## Analysing results
 ans = {}
@@ -264,3 +277,6 @@ if dataClean == 1:
     validUser = validUser[:80]  # FIXME
     # Call dataCleanup function with validUser array
     dc.dataCleanup(validUser);
+
+## ToDo
+# print at start the num of Users and Posts
