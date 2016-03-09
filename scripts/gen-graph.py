@@ -7,6 +7,7 @@ from hinton import hinton
 import operator
 import precisionAtK as pak
 import datacleanup as dc
+import pdb
 
 #Parsing the xml file
 def get_list(cmd):
@@ -19,7 +20,7 @@ def get_list(cmd):
     out_list.remove('')
     return out_list
 
-lappy = 0
+lappy = 1
 pflag = 0   # Flag to enable verbose printing
 hinplot = 1 # Flag to enable hinton plots
 presults = 1    # Flag to print sorted results
@@ -47,6 +48,7 @@ for i in range(len(plist)):
         inback = ':'.join(temp)
         plist[i] = inback
 
+pdb.set_trace()
 if pflag == 1:
     print(plist)
 
@@ -182,7 +184,8 @@ for post in plist:
 
 for user in ulist:
     A[idx,idx] = 1
-    B[idx,0] = 1/3 * (repu[user.split(':')[0]]/maxrepu)
+    B[idx,0] = 0 # 1/3 * (repu[user.split(':')[0]]/maxrepu)
+    #B[idx,0] = 1/3 * (repu[user.split(':')[0]]/maxrepu)
     idx += 1
 
 if hinplot == 1:
