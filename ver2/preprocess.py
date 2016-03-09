@@ -105,7 +105,7 @@ qlt = {}    # ques:list of answers time
 qpat = {}   # Ques: previous answer time
 qcl = {}    # Ques: choice list
 qtcl = {}   # Ques: time, choice list
-pluvt = {}
+pluvt = {}  # post:list of upvote time
 
 # create ques:list of answers dictionary --> qla
 # create ans:time dictionary --> atc
@@ -123,18 +123,18 @@ for post in plist:
         qcl[temp[0]] = []
         qtcl[temp[0]] = []
     elif post_type == '2':
-        ansTime = temp[5].split('T')[0]
+        ansTime = date(temp[5].split('T')[0])
         qla[temp[2]].append(temp[0])
         qlt[temp[2]].append(ansTime)
         atc[temp[0]] = ansTime
         if not qpat[temp[2]]:
             qpat[temp[2]].append(ansTime)
-            qcl[temp[2]].append([1])
+            qcl[temp[2]].append([0])
             ####
-            newEntry = [ansTime, [1]]
+            newEntry = [ansTime, [0]]
             qtcl[temp[2]].append(newEntry)
         else:
-            if date(qpat[temp[2]][-1]) == date(ansTime):
+            if qpat[temp[2]][-1] == ansTime:
                 # one more answer at same date
                 # no update in qpat
                 # qcl just add one more choice in the same list
@@ -148,11 +148,11 @@ for post in plist:
                 # append new list of choices
                 qpat[temp[2]].append(ansTime)
                 pc = qcl[temp[2]][-1][-1]
-                newList = list(xrange(1,pc+2))
+                newList = list(xrange(0,pc+2))
                 qcl[temp[2]].append(newList)
                 ####
                 pc = qtcl[temp[2]][-1][1][-1]
-                newList = list(xrange(1,pc+2))
+                newList = list(xrange(0,pc+2))
                 newEntry = [ansTime, newList]
                 qtcl[temp[2]].append(newEntry)
 
@@ -162,215 +162,34 @@ pdb.set_trace()
 for vote in vlist:
     temp = vote.split(',')
     # FIXME: Only upvote being considered
-    if temp[2] == 2:
+    if temp[2] == '2':
         if temp[1] in pluvt: 
-            pluvt[temp[1]].append(temp[3].split('T')[0])
+            pluvt[temp[1]].append(date(temp[3].split('T')[0]))
 
 pdb.set_trace()
 
-# create observations: datastructure used are
-# 
+# create observations: qobs
+qobs = {}
+# datastructure used are
+# qtcl and pluvt, qla
+for key in qla:
+    qobs[key] = []
+    ansNum = 0
+    for ans in qla[key]:
+        for evote in pluvt[ans]:
+            # do binary search in qpat to find the index
+            idx = np.searchsorted(qpat[key],evote,side='right')-1
+            newObs = [ansNum,qcl[key][idx]]
+            qobs[key].append(newObs)
+        ansNum += 1
 
-# initialisation of user quality dictionary
-uqualdict = {v.split(':')[1]:[] for v in ulist}
-
-## Printing the graph file G2
-if pflag == 1:
-    print("digraph G {")
-## Printing all user nodes with attributes
-for key in udict:
-    if pflag == 1:
-        print(key + " " + "[label=\"" + udict[key] + "\",shape=box,color=red]")
-
-## Printing all post nodes with attributes + edges
-## temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId]
+pdb.set_trace()
+# temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId,CreationDate]
 for post in plist:
     temp = post.split(':')
-    post_type = temp.pop(1)
-    if post_type == '1':
-        qcvotesdict[temp[0]] = 1        # Create a key in qcvotesdict and initialise to 1(to avoid division by 0)
-        f_acc[temp[4]] = 1              # flag for AcceptedAnswerId
-        Na[temp[0]] = 0                 # create a key in Na
-        vq[temp[0]] = int(temp[3])      # Storing votes for ques Fixme:negative vote
-        if temp[1] != '':
-            Unq[temp[1]] += 1               # Storing number of ques by a particular user
-        if pflag == 1:
-            print(temp[0] + " [shape=triangle,color=green]")    # Print ques node
-            print('"' + temp[1] + '"', '->','"' + temp[0] + '"' + " [label=u2q]")   # Print user to ques edge
-    elif post_type == '2':
-        qcvotesdict[temp[2]] += abs(int(temp[3]))   # Add votes(score) of this answer to overall sum
-        Na[temp[2]] += 1                            # Counting the number of answers for the parent ques
-        if temp[1] != '':
-            Una[temp[1]] += 1                           # Storing number of ans by a particular user
-        if pflag == 1:
-            print(temp[0] + " [shape=ellipse,color=blue,score=" + temp[3] + "]")    # Print ans node
-            print('"' + temp[1] + '"', '->','"' + temp[0] + '"' + " [label=u2a,weight=" + temp[3] + "]")    # Print user to ans edge
-            print('"' + temp[2] + '"', '->','"' + temp[0] + '"' + " [label=q2a,weight=" + temp[3] + "]")    # Print ques to ans edge
-if pflag == 1:
-    print("}")
-    print(qcvotesdict)
+    ptype = temp.pop(1)
+    if ptype == '1':
+        qobs[temp[0]] = []
+    elif ptype == '2':
+        pluvt[temp[0]]
 
-## Calculate each answers vote ratio
-## temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId]
-for post in plist:
-    temp = post.split(':')
-    post_type = temp.pop(1)
-    if post_type == '2':
-        #print("Ans")
-        avotesdict[temp[0]] = int(temp[3])/qcvotesdict[temp[2]]
-        if temp[1] != '':
-            uqualdict[udict[temp[1]]].append(avotesdict[temp[0]])
-
-if pflag == 1:
-    print(avotesdict)
-    pprint.pprint(uqualdict)
-
-## Independent variables(knowns)
-va = avotesdict
-sumva = qcvotesdict
-avgsumva = {}
-repu = {}
-for va_key in sumva:
-    if Na[va_key] != 0:
-        avgsumva[va_key] = sumva[va_key]/Na[va_key]
-    else:
-        avgsumva[va_key] = 0
-
-## Forming system of linear equations
-## temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId]
-x_theory = [p.split(':')[0] for p in plist]
-for v in ulist:
-    temp = v.split(':')
-    x_theory.append(temp[0])
-    repu[temp[0]] = int(temp[2])
-N = len(plist) + len(ulist)
-A = np.zeros((N,N))
-B = np.zeros((N,1))
-maxNa = max(list(Na.values()))
-maxvq = max(list(vq.values()))
-maxrepu = max(list(repu.values()))
-maxavgsumva = max(list(avgsumva.values()))
-idx = 0
-for post in plist:
-    temp = post.split(':')
-    post_type = temp.pop(1)
-    if post_type == '2':
-        ## Implementing equation fa
-        A[idx,idx] = 1
-        A[idx,x_theory.index(temp[1])] = -1/3
-        B[idx,0] = 1/3 * (va[temp[0]] + f_acc.get(temp[0],0))
-        # Partial fu
-        A[x_theory.index(temp[1]),idx] = -1/3 * 1/Una[temp[1]]  # for u_k
-    elif post_type == '1':
-        ## Implementing equation fq
-        A[idx,idx] = 1
-        if temp[1] != '':
-            A[idx,x_theory.index(temp[1])] = -1/4
-            A[x_theory.index(temp[1]),idx] = -1/3 * 1/Unq[temp[1]]  # for u_k, Partial fu
-        B[idx,0] = 1/4 * (Na[temp[0]]/maxNa + vq[temp[0]]/maxvq + avgsumva[temp[0]]/maxavgsumva)
-    else:
-        ## Other PostTypeId
-        A[idx,idx] = 1
-    idx += 1
-
-for user in ulist:
-    A[idx,idx] = 1
-    B[idx,0] = 0 # 1/3 * (repu[user.split(':')[0]]/maxrepu)
-    #B[idx,0] = 1/3 * (repu[user.split(':')[0]]/maxrepu)
-    idx += 1
-
-if hinplot == 1:
-    hinton(A, 'Amat')
-    hinton(B, 'Bvec')
-solution = np.linalg.solve(A,B)
-out = dict(zip(x_theory,solution))
-#pprint.pprint(out)
-
-if hinplot == 1:
-    hinton(solution, 'Sol')
-
-## Analysing results
-ans = {}
-ques = {}
-uuser = {}
-userQ = {}
-anslist = []
-queslist = []
-uuserlist = []
-## temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId]
-for post in plist:
-    temp = post.split(':')
-    post_type = temp.pop(1)
-    if post_type == '2':
-        ans[temp[0]] = out[temp[0]]
-        anslist.append(out[temp[0]])
-    elif post_type == '1':
-        ques[temp[0]] = out[temp[0]]
-        queslist.append(out[temp[0]])
-
-for user in ulist:
-    indx = user.split(':')[0]
-    name = user.split(':')[1]
-    uuser[name] = out[indx]
-    uuserlist.append(out[indx])
-    userQ[indx] = out[indx]
-
-sorted_ans = sorted(ans.items(), key=operator.itemgetter(1))
-sorted_ques = sorted(ques.items(), key=operator.itemgetter(1))
-sorted_uuser = sorted(uuser.items(), key=operator.itemgetter(1))
-if presults == 1:
-    pprint.pprint(sorted_uuser)
-    pprint.pprint(sorted_ques)
-    pprint.pprint(sorted_ans)
-
-## Histogram
-if histplot == 1:
-    userhist = np.histogram(uuserlist)
-    queshist = np.histogram(queslist)
-    plt.figure(1)
-    plt.plot(userhist[1][1:], userhist[0])
-    plt.xlabel('User Quality')
-    plt.ylabel('Number of Users')
-    plt.title('User Quality Histogram')
-    plt.savefig('UQualHist.png')
-    plt.figure(2)
-    plt.plot(queshist[1][1:], queshist[0])
-    plt.xlabel('Ques Quality')
-    plt.ylabel('Number of Ques')
-    plt.title('Ques Quality Histogram')
-    plt.savefig('QQualHist.png')
-    print("User:")
-    pprint.pprint(userhist)
-    print("Ques:")
-    pprint.pprint(queshist)
-
-## Precision at K
-if doPatK == 1:
-    ## sort/rank userQ by Quality from linear model
-    sorted_userQ = sorted(userQ.items(), key=operator.itemgetter(1), reverse=True)
-    ## sort/rank user by reputation
-    sorted_repu = sorted(repu.items(), key=operator.itemgetter(1), reverse=True)
-    rankLS = [int(v[0]) for v in sorted_userQ]
-    rankRepu = [int(v[0]) for v in sorted_repu]
-    #pprint.pprint(rankLS)
-    #pprint.pprint(rankRepu)
-    ## compute precisionAtK
-    PatK = pak.precisionAtK(np.array(rankLS), np.array(rankRepu), 20)
-    #pprint.pprint(PatK)
-    plt.figure(3)
-    plt.plot(PatK[1], PatK[0])
-    plt.xlabel('K')
-    plt.ylabel('Precision at K')
-    plt.title('Precision at K')
-    plt.savefig('PatK.png')
-    plt.show()
-
-## Data Cleanup
-if dataClean == 1:
-    validUser = np.array(rankLS);
-    validUser = validUser[:80]  # FIXME
-    # Call dataCleanup function with validUser array
-    dc.dataCleanup(validUser);
-
-## ToDo
-# print at start the num of Users and Posts
