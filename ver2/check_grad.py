@@ -8,5 +8,5 @@ voteHist2 = [[2, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]], [2, [0, 1, 2, 3, 4, 5, 6, 7, 8
 
 
 print "Error:"
-print "In1: ",optimize.check_grad(simulation.objFunc2,simulation.objFunc2Grad,np.random.randn(10),voteHist2)
-print "In2: ",optimize.check_grad(simulation.objFunc2,simulation.objFunc2Grad,np.random.randn(6),voteHist)
+print "In1: ",optimize.check_grad(simulation.objFunc2,simulation.objFunc2Grad,np.random.randn(6),voteHist)
+print "In2: ",optimize.check_grad(simulation.objFunc2,simulation.objFunc2Grad,np.random.randn(10),voteHist2)

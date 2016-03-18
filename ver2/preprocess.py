@@ -3,10 +3,7 @@ import subprocess
 import pprint
 import numpy as np
 import matplotlib.pyplot as plt
-#from hinton import hinton
 import operator
-#import precisionAtK as pak
-#import datacleanup as dc
 from datetime import datetime
 import pdb
 
@@ -27,11 +24,6 @@ def get_list(cmd):
 
 lappy = 1
 pflag = 0   # Flag to enable verbose printing
-hinplot = 1 # Flag to enable hinton plots
-presults = 1    # Flag to print sorted results
-histplot = 1    # Flag to print histogram
-doPatK = 1      # Flag for plotting Precision at K
-dataClean = 0   # Flag for cleaning up the data(PatK should also be enabled)
 newFiles = 0    # Flag to read from new cleaned up files
 
 ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
@@ -184,12 +176,3 @@ for key in qla:
         ansNum += 1
 
 pdb.set_trace()
-# temp def: [postid,post_type(poped),ownerid,parentid,score,AcceptedAnswerId,CreationDate]
-for post in plist:
-    temp = post.split(':')
-    ptype = temp.pop(1)
-    if ptype == '1':
-        qobs[temp[0]] = []
-    elif ptype == '2':
-        pluvt[temp[0]]
-

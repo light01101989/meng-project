@@ -17,7 +17,7 @@ def objFunc(thetaVec, *args):
 # Takes in voteHistory
 # Returns both function value and gradient
 def objFunc2(thetaVec, *args):
-    #voteHist = args[0]     # when called by check_grad
+    #voteHist = args[0]     # FIXME when called by check_grad
     voteHist = args         # when called by fmin_l_bfgs_b
     out = 0
     grad = np.zeros_like(thetaVec)
