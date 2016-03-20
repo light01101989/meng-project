@@ -31,12 +31,12 @@ def objFunc2(thetaVec, *args):
     grad = grad+p2g
     return out,grad
     #print "out",out
-    #return out
+    #return out             # FIXME when called by check_grad
 
 # Written just for check_grad
 def objFunc2Grad(thetaVec, *args):
-    #voteHist = args[0]     # when called by check_grad
-    voteHist = args         # when called by fmin_l_bfgs_b
+    voteHist = args[0]       # when called by check_grad
+    #voteHist = args         # when called by fmin_l_bfgs_b
     out = 0
     grad = np.zeros_like(thetaVec)
     for i in range(len(voteHist)):
@@ -56,7 +56,7 @@ def objFunc2Core(thetaVec, curVote):
     tmp[curVote[0]] = 1
     p1 = np.sum(tmp*thetaVec)
     #p3 = logsumexp(thetaVec[0:curVote[1].size])
-    p3 = logsumexp(thetaVec[0:len(curVote[1])])
+    p3 = logsumexp(thetaVec[curVote[1]])
     return -p1+p3
 
 # Main function
@@ -65,7 +65,7 @@ def objFunc2CoreGrad(thetaVec, curVote):
     tmp[curVote[0]] = 1
     p1 = tmp
     #curTheta = thetaVec[0:curVote[1].size]
-    curTheta = thetaVec[0:len(curVote[1])]
+    curTheta = thetaVec[curVote[1]]
     p3 =  np.zeros_like(thetaVec)
     p3[curVote[1]] = np.exp(curTheta)/np.sum(np.exp(curTheta))
     return -p1+p3

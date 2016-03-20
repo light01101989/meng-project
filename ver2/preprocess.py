@@ -90,6 +90,7 @@ qpat = {}   # Ques: previous answer time
 qcl = {}    # Ques: choice list
 qtcl = {}   # Ques: time, choice list(not used)
 pluvt = {}  # post:list of upvote time
+pldvt = {}  # post:list of downvote time
 
 # create ques:list of answers dictionary --> qla
 # create ans:time dictionary --> atc
@@ -99,6 +100,7 @@ for post in plist:
     temp = post.split(':')
     post_type = temp.pop(1)
     pluvt[temp[0]] = []
+    pldvt[temp[0]] = []
     if post_type == '1':
         # question
         qla[temp[0]] = []
@@ -113,9 +115,10 @@ for post in plist:
         atc[temp[0]] = ansTime
         if not qpat[temp[2]]:
             qpat[temp[2]].append(ansTime)
-            qcl[temp[2]].append([0])
+            # 0 is for fake answer(DownVote)
+            qcl[temp[2]].append([0, 1])
             ####
-            newEntry = [ansTime, [0]]
+            newEntry = [ansTime, [0, 1]]
             qtcl[temp[2]].append(newEntry)
         else:
             if qpat[temp[2]][-1] == ansTime:
@@ -148,19 +151,26 @@ for vote in vlist:
     if temp[2] == '2':
         if temp[1] in pluvt: 
             pluvt[temp[1]].append(date(temp[3].split('T')[0]))
+    if temp[2] == '3':
+        # DownVote
+        if temp[1] in pldvt: 
+            pldvt[temp[1]].append(date(temp[3].split('T')[0]))
 
 # create observations: qobs
 qobs = {}
+ansFake = 0     # 0 corresponds to fake answer which
+                # distuinguish between wrong and right
 # datastructure used are
 # qcl and pluvt, qla, qpat
 maxVoteQues = 0
 for key in qla:
     qobs[key] = []
-    ansNum = 0
+    ansNum = 1
     maxAnsNum = 0
     maxUpvote = 0
     for ans in qla[key]:
         cntUpvote = 0
+        # UpVote
         for evote in pluvt[ans]:
             # do binary search in qpat to find the index
             idx = np.searchsorted(qpat[key],evote,side='right')-1
@@ -173,6 +183,11 @@ for key in qla:
             maxUpvote = cntUpvote
             maxAnsNum = ansNum
 
+        # DownVote
+        for edvote in pldvt[ans]:
+            newObs = [ansFake, [ansFake, ansNum]]
+            qobs[key].append(newObs)
+            print "downvote in key ", key
         ansNum += 1
 
     # Print keys where last answer rocks

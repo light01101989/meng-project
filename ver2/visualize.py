@@ -29,27 +29,31 @@ def visualizeScat(voteHist):
     np.random.seed(11)
     # color dictionary
     color = {}
-    allAnsList = voteHist[-1][-1]
+    allAnsList = list(xrange(voteHist[-1][-1][-1]+1))
 
     for i in allAnsList:
         color[i] = (tuple(np.random.rand(3)))
         # Plot a stem for each answer
-        markerline, stemlines, baseline = plt.stem([i+1],[allAnsList[i]+1], '-s', label='Answer: %d' % (i+1))
+        markerline, stemlines, baseline = plt.stem([i],[allAnsList[i]+1], '-s', label='Answer: %d' % (i))
         plt.setp(stemlines, color=color[i])
         plt.setp(baseline, 'color', 'r', 'linewidth', 9)
 
     legend = plt.legend(loc='upper left')
     # Set limit on x axis
-    plt.xlim([allAnsList[0],allAnsList[-1]+2])
+    plt.xlim([allAnsList[0]-1,allAnsList[-1]+2])
     plt.ylim([allAnsList[0],allAnsList[-1]+2])
 
     # Plot all the upvotes
     for vote in voteHist:
-        plt.scatter(len(vote[1])+np.random.rand(1),[vote[0]+1],c=color[vote[0]])
+        if vote[0] == 0:
+            # Fake answer
+            plt.scatter(vote[1][1]+np.random.rand(1),[vote[0]+1],c=color[vote[0]])
+        else:
+            plt.scatter(len(vote[1])+np.random.rand(1)-1,[vote[0]+1],c=color[vote[0]])
 
     plt.xlabel("Events", size=10, style='italic')
     plt.ylabel("Answers", size=10, style='italic')
-    plt.title("Timeline of UpVote events")
+    plt.title("Timeline of UpVote events\n 0 --> Fake Answer")
 
     plt.grid('on')
     plt.show()
@@ -58,7 +62,15 @@ def barPlot(estTheta):
     # Find the min
     estThetaArr = np.array(estTheta)
     estThetaArr -= estThetaArr.min()
-    plt.bar(np.array(xrange(len(estThetaArr)))+0.6, estThetaArr)
+    plt.bar(np.array(xrange(len(estThetaArr)))-0.4, estThetaArr)
+
+    plt.xlabel("Answers", size=10, style='italic')
+    plt.ylabel("Answer Quality/EstTheta", size=10, style='italic')
+    plt.title("Answer Quality Plot\n 0 is threshold b/w right & wrong")
+
+    # Set limit on x axis
+    plt.xlim([-1,len(estTheta)])
+
     plt.show()
 
 def testVisualize():
