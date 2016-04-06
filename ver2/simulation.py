@@ -17,8 +17,28 @@ def objFunc(thetaVec, *args):
 # Takes in voteHistory
 # Returns both function value and gradient
 def objFunc2(thetaVec, *args):
-    #voteHist = args[0]     # FIXME when called by check_grad
+    #voteHist = args[0]     # FIXME when called by check_grad/adaGrad
     voteHist = args         # when called by fmin_l_bfgs_b
+    out = 0
+    grad = np.zeros_like(thetaVec)
+    for i in range(len(voteHist)):
+        out += objFunc2Core(thetaVec, voteHist[i])
+        grad += objFunc2CoreGrad(thetaVec, voteHist[i])
+
+    p2 = np.sum(np.square(thetaVec))
+    p2g = 2*thetaVec
+    out = out+p2
+    grad = grad+p2g
+    return out,grad
+    #print "out",out
+    #return out             # FIXME when called by check_grad
+
+# Takes in voteHistory
+# Returns both function value and gradient
+# FIXME:Same as above(because of args issue)
+def objFunc2Ada(thetaVec, *args):
+    voteHist = args[0]     # FIXME when called by check_grad/adaGrad
+    #voteHist = args         # when called by fmin_l_bfgs_b
     out = 0
     grad = np.zeros_like(thetaVec)
     for i in range(len(voteHist)):
@@ -69,6 +89,23 @@ def objFunc2CoreGrad(thetaVec, curVote):
     p3 =  np.zeros_like(thetaVec)
     p3[curVote[1]] = np.exp(curTheta)/np.sum(np.exp(curTheta))
     return -p1+p3
+
+def adaGrad(initialGuess, voteHist):
+    initialLR = 0.5
+    accumGrad = np.zeros_like(initialGuess)
+    bound = 0.00001
+    funcVal, grad = objFunc2Ada(initialGuess, voteHist)
+    out = initialGuess
+    cnt = 0
+    # while not converged
+    while np.linalg.norm(grad) > bound:
+        funcVal, grad = objFunc2Ada(out, voteHist)
+        accumGrad += np.square(grad)
+        adjGrad = grad/np.sqrt(accumGrad)
+        out = out - initialLR*adjGrad
+        cnt += 1
+    print "numIteration: ",cnt
+    return out
 
 # Simulate N new clicks from every iteration
 def simulateClicks(N, cDist):
@@ -133,6 +170,9 @@ def runModel(voteHist,numAns):
     #initialVal = np.random.randn(numAns)
     # Optimization
     sol, f, d = optimize.fmin_l_bfgs_b(objFunc2, initialVal, args=voteHist, disp=0)
+    #print sol
+    #sol2 = adaGrad(initialVal, voteHist)
+    #print sol2
     return sol
 
 def runTest():
