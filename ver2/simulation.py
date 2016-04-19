@@ -361,14 +361,16 @@ def runTestUser(N):
         qaidx[np.floor(i/numAnsPques)].append(i)
         uaidx[i%numAnsPques].append(i)
 
-    #print(qaidx)
-    #print(uaidx)
-
+    print "qaidx",qaidx
+    print "uaidx",uaidx
+    print "uphiidx",uphiidx
     # generate clicks for each ques
     for i in xrange(numQues):
         pDens = np.exp(Theta[:,i])/np.sum(np.exp(Theta[:,i]))
         cDist = np.cumsum(pDens)
         qvHist[i] = genHist(N, cDist)
+
+    print "qvHist",qvHist
 
     # optimize
     initialVal = np.ones(totalAns+nUser)*0.1
