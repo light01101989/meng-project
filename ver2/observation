@@ -60,3 +60,146 @@ numIteration:  72
 [-0.61270421  0.16319477  1.56179605 -0.75085062 -0.30730294  0.38567208
  -0.02124531 -0.2635887  -0.15497695]
 
+molnargroup@molnargroup-OptiPlex-7020:~/Music/project/datasets/stackoverflow$ time python ../../ver2/breakFiles_compress.py 
+FF1
+FF2
+FF3
+FF4
+FF5
+FF6
+FF7
+FF8
+FF9
+FF10
+FF11
+final-Users.csv
+
+real	1m32.595s
+user	1m9.520s
+sys	0m5.316s
+
+FF1
+FF2
+FF3
+FF4
+FF5
+FF6
+FF7
+FF8
+FF9
+FF10
+FF11
+FF12
+FF13
+FF14
+FF15
+FF16
+FF17
+FF18
+FF19
+FF20
+FF21
+FF22
+FF23
+FF24
+FF25
+FF26
+FF27
+FF28
+FF29
+FF30
+FF31
+FF32
+FF33
+FF34
+FF35
+FF36
+FF37
+FF38
+FF39
+FF40
+FF41
+FF42
+FF43
+FF44
+FF45
+FF46
+FF47
+FF48
+FF49
+FF50
+FF51
+FF52
+FF53
+FF54
+FF55
+FF56
+FF57
+FF58
+FF59
+FF60
+FF61
+FF62
+FF63
+FF64
+FF65
+FF66
+FF67
+FF68
+FF69
+FF70
+FF71
+FF72
+FF73
+FF74
+FF75
+FF76
+FF77
+FF78
+FF79
+FF80
+FF81
+FF82
+FF83
+FF84
+FF85
+FF86
+FF87
+FF88
+FF89
+FF90
+FF91
+FF92
+FF93
+FF94
+FF95
+FF96
+FF97
+FF98
+FF99
+FF100
+FF101
+FF102
+FF103
+FF104
+FF105
+FF106
+final-Users.csv
+
+real	1m42.655s
+user	1m10.108s
+sys	0m4.972s
+
+molnargroup@molnargroup-OptiPlex-7020:~/Music/project/datasets/stackoverflow$ time wc -l Posts.xml
+29499662 Posts.xml
+
+real	9m53.289s
+user	0m2.392s
+sys	0m13.692s
+molnargroup@molnargroup-OptiPlex-7020:~/Music/project/datasets/stackoverflow$ time wc -l Users.xml 
+5277833 Users.xml
+
+real	0m16.943s
+user	0m0.160s
+sys	0m0.480s
+
