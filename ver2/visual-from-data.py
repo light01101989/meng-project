@@ -44,4 +44,76 @@ def user_histogram():
     plt.style.use('ggplot')
     plt.show()
 
-user_histogram()
+def post_byuser_hist():
+    # open file to read
+    p = open('final-Posts.csv', 'r')
+    u = open('final-Users.csv', 'r')
+
+    # make array of upvotes
+    user_pcnt = {}
+    user_acnt = {}
+    user_qcnt = {}
+    # line --> Userid:displayname:Reputation:UpVotes:DownVotes
+    for line in u:
+        lspl = line.split(':')
+        if len(lspl) < 5:
+            print lspl
+            continue
+        user_pcnt[int(lspl[0])] = 0
+        user_acnt[int(lspl[0])] = 0
+        user_qcnt[int(lspl[0])] = 0
+
+    ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId:CreationDate:CAnswerCount
+    k=0
+    status = 5000000
+    orphan_postcnt = 0
+    for line in p:
+        if k > status:
+            print "..."
+            status += 5000000
+        lspl = line.split(',')
+        if len(lspl) < 8:
+            print lspl
+            continue
+        try:
+            temp = int(lspl[2])
+        except ValueError:
+            orphan_postcnt += 1
+            continue
+        ptype = lspl[1]
+        if temp in user_pcnt:
+            user_pcnt[temp] += 1
+            if ptype == '2':
+                user_acnt[temp] += 1
+            if ptype == '1':
+                user_qcnt[temp] += 1
+        k += 1
+
+    # do histogram
+    #n,bins,patch = plt.hist(user_pcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical')
+    #n,bins,patch = plt.hist(user_acnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical',color='r')
+    n,bins,patch = plt.hist(user_qcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical',color='g')
+
+    numUsers = len(user_pcnt.keys())
+
+    print "Orphan post count:: %d" % orphan_postcnt
+    #print n
+    #print bins
+    print "Number of Users:: %d" % numUsers
+
+    #cumper = (np.cumsum(n)/float(numUsers))*100
+    cumper = (n/float(numUsers))*100
+    #print cumper
+
+    for i in xrange(cumper.size):
+        plt.annotate('%.2f'%cumper[i], xy=((bins[i]+bins[i+1])/2-1,n[i]/2),rotation='vertical')
+
+    # plot
+    plt.xlabel("Number of Questions", size=12, style='italic')
+    plt.ylabel("Number of Users", size=12, style='italic')
+    plt.title("Cumulative Histogram of Users vs number of Questions\nNumbers above bars are % of users below right edge of bar")
+    plt.style.use('ggplot')
+    plt.show()
+
+#user_histogram()
+post_byuser_hist()
