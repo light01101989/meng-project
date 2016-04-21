@@ -21,29 +21,28 @@ def get_list(cmd):
     out_list.remove('')
     return out_list
 
-def prune_attributes(filename,outname):
+def prune_attributes(filename,outname,ftype):
     pflag = 0   # Flag to enable verbose printing
     newFiles = 0    # Flag to read from new cleaned up files
 
     scriptPath = os.path.dirname(os.path.realpath(__file__)) + '/../scripts/'
-    ### Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId
-    #if newFiles == 1:
-    #    plist = get_list(scriptPath + 'get-newpost-owner-user-id.sh')
-    #else:
-    #    plist = get_list(scriptPath + 'get-post-owner-user-id.sh')
-    #
-    #if pflag == 1:
-    #    print(plist)
+    if ftype=='post':
+        ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId:CreationDate:CAnswerCount
+        alist = get_list([scriptPath + 'get-post-attrib.sh', filename])
 
-    ## Get list for Userid:displayname:Reputation:UpVotes:DownVotes
-    if newFiles == 1:
-        ulist = get_list([scriptPath + 'get-newuser-upvotes.sh', filename])
-    else:
-        ulist = get_list([scriptPath + 'get-user-upvotes.sh', filename])
-    ## Insert a Dummy user with Id '-2'
-    #ulist.append('-2:Dummy:0')
-    if pflag == 1:
-        print(ulist)
+        if pflag == 1:
+            print(alist)
+
+    if ftype=='user':
+        ## Get list for Userid:displayname:Reputation:UpVotes:DownVotes
+        if newFiles == 1:
+            alist = get_list([scriptPath + 'get-newuser-upvotes.sh', filename])
+        else:
+            alist = get_list([scriptPath + 'get-user-upvotes.sh', filename])
+        ## Insert a Dummy user with Id '-2'
+        #alist.append('-2:Dummy:0')
+        if pflag == 1:
+            print(alist)
 
     ### Get list for VoteId:PostId:VoteTypeId:CreationDate
     #if lappy == 1:
@@ -70,8 +69,8 @@ def prune_attributes(filename,outname):
     else:
         fname = 'prune-'+ filename + '.csv'
         wu = open(fname, 'w')
-    for i in xrange(len(ulist)):
-        wu.write(ulist[i])
+    for i in xrange(len(alist)):
+        wu.write(alist[i])
         wu.write('\n')
 
     return fname
