@@ -1,6 +1,7 @@
 #!usr/bin/python
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 import pdb
 
 # NOTE: Need to call from datasets/<xyz>/ directory
@@ -90,9 +91,9 @@ def post_byuser_hist():
         k += 1
 
     # do histogram
-    #n,bins,patch = plt.hist(user_pcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical')
+    n,bins,patch = plt.hist(user_pcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical')
     #n,bins,patch = plt.hist(user_acnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical',color='r')
-    n,bins,patch = plt.hist(user_qcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical',color='g')
+    #n,bins,patch = plt.hist(user_qcnt.values(),bins=[0,5,10,15,20,25,30,40,50,60,70,80,90,100],cumulative=True,normed=False,orientation='vertical',color='g')
 
     numUsers = len(user_pcnt.keys())
 
@@ -115,5 +116,15 @@ def post_byuser_hist():
     plt.style.use('ggplot')
     plt.show()
 
-#user_histogram()
-post_byuser_hist()
+parser = argparse.ArgumentParser(description='Script to visualize histogram of user/upvotes or user/post')
+parser.add_argument('-u','--userupvotes', help='flag to plot histogram of user/upvotes',required=False,action='store_true')
+parser.add_argument('-p','--userpost', help='flag to plot histogram of user/post', required=False,action='store_true')
+args = parser.parse_args()
+
+## show values ##
+#print ("minPosts: %s" % args.userupvotes )
+#print ("minUsers: %s" % args.userpost )
+if args.userupvotes:
+    user_histogram()
+if args.userpost:
+    post_byuser_hist()
