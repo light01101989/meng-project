@@ -30,9 +30,6 @@ def prune_attributes(filename,outname,ftype):
         ## Get list for postid:post_type:ownerid:parentid(onlyforans):score:AcceptedAnswerId:CreationDate:CAnswerCount
         alist = get_list([scriptPath + 'get-post-attrib.sh', filename])
 
-        if pflag == 1:
-            print(alist)
-
     if ftype=='user':
         ## Get list for Userid:displayname:Reputation:UpVotes:DownVotes
         if newFiles == 1:
@@ -41,23 +38,13 @@ def prune_attributes(filename,outname,ftype):
             alist = get_list([scriptPath + 'get-user-upvotes.sh', filename])
         ## Insert a Dummy user with Id '-2'
         #alist.append('-2:Dummy:0')
-        if pflag == 1:
-            print(alist)
 
-    ### Get list for VoteId:PostId:VoteTypeId:CreationDate
-    #if lappy == 1:
-    #    if newFiles == 1:
-    #        vlist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-newuser-id-name.sh')
-    #        print "change file"
-    #    else:
-    #        vlist = get_list('/home/arjun/Desktop/Cornell_courses/mengproject/scripts/get-vote-full.sh')
-    #else:
-    #    if newFiles == 1:
-    #        vlist = get_list('/home/molnargroup/Music/project/scripts/get-newuser-id-name.sh')
-    #        print "change file"
-    #    else:
-    #        vlist = get_list('/home/molnargroup/Music/project/scripts/get-user-id-name.sh')
-    #        print "change file"
+    if ftype == 'vote':
+        ### Get list for VoteId:PostId:VoteTypeId:CreationDate
+        alist = get_list([scriptPath + 'get-vote-full.sh', filename])
+
+    if pflag == 1:
+        print(alist)
 
     #print "Data Loaded!!!"
     #print "Processing..."

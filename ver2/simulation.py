@@ -361,6 +361,7 @@ def runTestUser(N):
         qaidx[np.floor(i/numAnsPques)].append(i)
         uaidx[i%numAnsPques].append(i)
 
+    pdb.set_trace()
     print "qaidx",qaidx
     print "uaidx",uaidx
     print "uphiidx",uphiidx
@@ -370,8 +371,9 @@ def runTestUser(N):
         cDist = np.cumsum(pDens)
         qvHist[i] = genHist(N, cDist)
 
-    print "qvHist",qvHist
+    #print "qvHist",qvHist
 
+    pdb.set_trace()
     # optimize
     initialVal = np.ones(totalAns+nUser)*0.1
     #print "Error with User:"

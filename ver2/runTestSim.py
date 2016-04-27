@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 simulation.runTestUser(50)
 # Ktau plot for User(Phi) with number of users
-#N=200
+#N=20
 #kTau = np.zeros(N)
 #for i in xrange(N):
 #    print i
