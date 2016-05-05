@@ -3,7 +3,7 @@
 
 ### Description of Main scripts present in ver2 folder
 
-1. **check_grad.py**       ==>        script to check the gradient
+1. [**check_grad.py**](https://github.com/light01101989/meng-project/blob/master/ver2/check_grad.py)       ==>        script to check the gradient
 2. **preprocess.py**       ==>        Important script: preprocess the data and structure it into following form for each question-
   * voteHist = [[0, [0, 1, 2, 3]], [0, [0, 1, 2, 3, 4]], [2, [0, 1, 2, 3]], [5, [0, 1, 2, 3, 4, 5]]]
 3. **simulation.py**       ==>        Main script to solve for theta parameters(contains all the optimization functions)
