@@ -12,3 +12,8 @@
 6. **runModelSim.py**      ==>        A test script which takes a particular voteHist and solve it with runModel in simulation script and visualizes data and output
 
 ### Dataset
+![alt text](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/stackexchange.png "Dataset")
+
+### Project Notes
+[Click Here!!](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/ProjectNotes.pdf)
+
