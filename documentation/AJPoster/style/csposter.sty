@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Poster Style to create Latex A0 Posters
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useinnertheme{rectangles}
+
+\usepackage{textpos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust the Papersize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A3 landscape
+\setlength{\paperheight}{29.7cm}
+\setlength{\paperwidth}{42.0cm}
+\setlength{\textheight}{27.6cm}
+\setlength{\textwidth}{40cm}
+
+%\setlength{\paperheight}{29.7cm}
+%\setlength{\paperwidth}{56.0cm}
+%\setlength{\textheight}{27.6cm}
+%\setlength{\textwidth}{54cm}
+
+%\setlength{\paperheight}{36in}
+%\setlength{\paperwidth}{48in}
+%\setlength{\textheight}{35in}
+%\setlength{\textwidth}{47in}
+
+
+% A2 landscape
+% \setlength{\paperheight}{42.1cm}
+% \setlength{\paperwidth}{59.9cm}
+% \setlength{\textheight}{42cm}
+% \setlength{\textwidth}{58.9cm}
+
+
+
+% Don't use these two commands! Everything breaks...
+%\setbeamersize{text margin left=1cm}
+%\setbeamersize{text margin right=1cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust the Fontsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\renewcommand{\normalsize}{\Huge}
+%\def\regularsize{\@setfontsize\normalsize{34pt}{37}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros & Color Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Definition of short-cuts/macros ------------------------------
+\newcommand{\copyr}{\textcopyright\xspace}
+\newcommand{\tm}{\texttrademark\xspace}
+\newcommand{\reg}{\textsuperscript{\textregistered}\xspace}
+
+% --- Definition of colors -----------------------------------------
+
+\definecolor{black}{RGB}{0,0,0}
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{riceblue}{RGB}{0,59,117}
+\definecolor{lightblue}{RGB}{149,167,217}
+\definecolor{lightgray}{gray}{0.5}
+\definecolor{verylightgray}{gray}{0.9}
+\definecolor{verylightblue}{RGB}{226,233,251}
+\definecolor{cornellred}{RGB}{178,32,37}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header Redefinition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\myHeaderHeight}{3.3cm}     % specify height of title box
+\newcommand{\myFooterHeight}{2.0cm}     % specify height of footer box
+
+
+% --- Head & Footline ----------------------------------------------
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% --- Customized Frametitle ----------------------------------------
+%\useoutertheme{shadow}
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=cornellred}
+%\setbeamerfont{frametitle}{series=\bfseries}
+%\setbeamercolor{frametitle}{size=\Huge}  % still too small for poster
+
+
+%%%%
+\setbeamercolor{item projected}{parent=item,use=item,fg=white,bg=lightgray}
+% these commands set the shape and the color of the itemize bullets
+\setbeamertemplate{itemize item}{\textcolor{lightgray}{\rule{5pt}{5pt}}}
+\setbeamertemplate{itemize subitem}{\textcolor{lightgray}{\rule{4pt}{4pt}}}
+\setbeamertemplate{itemize subsubitem}{\rule{2pt}{2pt}}
+\setbeamertemplate{enumerate items}[square]
+
+\setbeamercolor{block title}{use=structure,fg=black,bg=lightblue} % colors of the block; e.g., theorems
+\setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+\setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=verylightblue}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=cornellred} % footer colors
+%\setbeamercolor{palette secondary}{use=structure,fg=black,bg=structure.fg!25!white}
+%\setbeamercolor{palette tertiary}{use=structure,fg=black,bg=structure.fg!30!white}
+%\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=structure.fg!35!white}
+%\setbeamercolor*{titlelike}{parent=palette primary}
+
+
+%%%%%% HEADER 
+\setbeamertemplate{frametitle}
+{
+%\newcommand{\myHeaderHeight}{2.0cm}     % specify height of title box
+\definecolor{headingcol}{rgb}{0.0,0.0,0.0} %%% COLOR OF TITLE FONT
+
+\begin{textblock}{55}(-1.3,0)
+\colorbox{cornellred}   % use the internal colors of the template
+{
+%\hspace{0.001\columnwidth}
+\hspace{0.5cm}
+ \parbox[c][\myHeaderHeight]{\textwidth}  % get colorbox-width = \textwidth
+ {
+ \vspace{0.2cm}
+  {\insertframetitle }
+ }
+}
+\end{textblock}
+
+%\begin{textblock}{25}(35,1.75)
+%\includegraphics{./style/eth_logo_white.pdf}  % UNIVERSITY LOGOS
+%\end{textblock}
+
+%\begin{textblock}{25}(44,1.25)
+%\includegraphics[width=5cm]{./style/ricelogo}  % UNIVERSITY LOGOS
+%\end{textblock}
+
+\begin{textblock}{25}(41.5,1.25)
+\includegraphics[width=2.11cm]{./style/neat-logo}
+% UNIVERSITY LOGOS
+\end{textblock}
+
+\begin{textblock}{25}(45.5,1.25)
+%\includegraphics[width=2.11cm]{./style/neat-logo} 
+\includegraphics[height=2.11cm]{./style/csllogo_white_bkgd}  % UNIVERSITY LOGOS
+\end{textblock}
+
+
+
+
+}
+
+
+%%%%%% FOOTER 
+\defbeamertemplate*{footline}{csstyle}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=5ex,dp=3ex,center]{author in head/foot}%    
+    \hspace{0.2cm}%\includegraphics[width=4cm]{style/eth_logo}
+       \footnotesize \copyright{} 2015 VLSI Information Processing (VIP) Group 
+  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.5\paperwidth,ht=5.5ex,dp=1ex,right]{author in head/foot}%
+%    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+%    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} \vspace{0.85ex}
+%  \end{beamercolorbox}
+  }%
+  \vskip0pt%
+}
+%
+
+%\pagestyle{empty}
+
+
+

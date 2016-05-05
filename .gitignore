@@ -3,3 +3,11 @@
 *.pyc
 *.txt
 *.tx
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk

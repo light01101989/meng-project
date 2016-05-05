@@ -1,0 +1,317 @@
+\documentclass[sansserif,mathserif]{beamer}
+
+%\usepackage[size=a0]{beamerposter}
+
+\usepackage{cmbright}
+\usepackage[english]{babel}
+\usepackage{booktabs} %\toprule \midrule \bottomrule
+\usepackage{colortbl,subfigure}
+\usepackage{tikz,pgf,pgfplots}
+\usepgfplotslibrary{groupplots} % LATEX
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{microtype}
+\input{vmr-symbols-vecbold}
+\input{standard-macros}
+\input{defs}
+
+\usepackage{etex}
+\reserveinserts{28}
+\usepackage{epstopdf}
+\newcommand{\defn}{\ensuremath{:  =}}
+
+\def\SW{\mathsf{SWAP}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer-Poster Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usecolortheme{rose}
+%\useinnertheme[shadow]{rounded}
+%\setbeamertemplate{itemize item}[circle]
+%\setbeamertemplate{itemize subitem}[square]
+%\renewcommand{\sfdefault}{let}
+
+\usepackage{style/csposter}   % the latex poster style package
+
+% --- Re-/Definition of Fonts ------------------------------
+% redefine subtitle for poster
+\definecolor{subtitlecolor}{RGB}{178,32,37}%{0.055,0.066,0.428}
+\renewcommand{\subtitle}[1]{\vspace{6mm}{\large \bf \color{subtitlecolor} #1}}
+\newcommand{\holine}{\vspace{0.3cm} \hrule height 2pt \vspace{-0.0cm}}
+
+
+\newcommand{\tcite}[2]{[\textcolor{cornellred}{#1, #2}]}
+
+\newcommand{\bspace}{\vspace{0.2cm}}
+
+\renewcommand{\emph}[1]{\textbf{\textcolor{cornellred}{#1}}}
+
+% --- The special macros -------------------------------------------
+
+%\definecolor{tblblue}{rgb}{0.93,0.93,1.0}
+%\definecolor{tblred}{rgb}{1,0.93,0.93}
+
+\definecolor{DarkBlue}{rgb}{0.1,0.1,0.5}
+\definecolor{BrickRed}{RGB}{203,65,84}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+\frametitle{
+\color{white}{\Huge \bf Optimal Data Detection in Large-MIMO Systems\\[0.3cm]}
+\color{white}{\Large Charles Jeon$^1$, Ramina Ghods$^1$, Arian Maleki$^2$, and Christoph Studer$^1$ \\}
+\color{white}{$^1$Cornell University; $^2$Columbia University}
+}
+\safemath{\MT}{{M_\textnormal{T}}}
+\safemath{\MR}{{M_\textnormal{R}}}
+\safemath{\Herm}{{\textnormal{H}}}
+
+% 4 column 0.224
+% ====================================================================`
+%\vspace{-1.4cm}
+\vspace{4.0cm}
+
+% font is large
+%\large
+
+\vspace{-0.2cm}
+
+\begin{columns}
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+% ====================================================================
+
+\vspace{-1.5cm}
+\subtitle{Large multiple-input multiple-output (MIMO)}
+\vspace{0.2cm}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{Idea: Tens of users communicate with a base station having hundreds of antennas simultaneously and in the same frequency band}\end{center}\vspace{-.2cm}}
+\vspace{-0.2cm}
+\end{exampleblock}
+
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{fig/overview.pdf} 
+\vspace{-0.7cm}
+\end{center}
+
+
+\begin{itemize}
+\item Improves the spectral efficiency and reduces power consumption compared to conventional (small-scale) MIMO wireless systems
+\item Useful in practice for massive (or large-scale) multi-user MIMO
+\item Believed to be the key technology in 5G wireless systems
+\\[0.1cm]
+\end{itemize}
+
+
+\vspace{0.0cm}
+
+
+\holine 
+\vspace{-0.1cm}
+
+\subtitle{Data detection in large MIMO systems}
+\vspace{0.2cm}
+
+\begin{itemize}
+\item Goal: Recover $\MT$-dimensional vector $\vecs_0\in\setO^\MT$ with constellation $\setO$ (e.g., QAM or PSK)  from the following input-output relation:
+\begin{align*}
+\vecy = \bH\vecs_0 + \vecn,
+\end{align*}
+where $ \bH\in\complexset^{\MR\times \MT}$ is the MIMO channel matrix ($\beta=\MT/\MR$) and $\vecn$ is i.i.d.\ additive white Gaussian noise with variance $N_0$
+\item Optimal data detection amounts to solving the following  individually-optimal (IO) detection problem:
+\begin{align*}
+\text{(IO)} \quad s_\ell^\text{IO} = \argmax_{\tilde{s}_\ell\in\setO} p(\tilde{s}_\ell | \vecy,\bH),
+\end{align*}
+\item The (IO) problem is {\bf combinatorial} and hence, its complexity scales exponentially in the number of transmit antennas $\MT$, i.e., $C \approx |\setO|^\MT$.
+
+\end{itemize}
+
+\begin{alertblock}{\vspace{-.4cm}\begin{center}\bf \textcolor{black}{With existing algorithms, optimal data detection is infeasible}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{alertblock}
+
+\vspace{0.1cm}
+
+\holine
+\vspace{-0.1cm}
+
+\subtitle{State-of-the-art in large-MIMO data detection}
+\vspace{0.2cm}
+
+\begin{itemize}
+\item Existing detection methods for large-MIMO rely on approximations in order to attain low computational complexity
+\item Most prominent detection method is linear minimum mean-square error (MMSE) equalization followed by quantization:
+\begin{align*}
+\hat{\vecs}^\text{MMSE} = \setQ_\setO\!\left((\bH^\Herm\bH+ N_0/E_s\bI)^{-1}\bH^\Herm\bmy\right)
+\end{align*}
+\item Such linear detectors suffer from a {\bf significant performance loss}
+\end{itemize}
+
+% ====================================================================
+\end{column}
+% ====================================================================
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+% ====================================================================
+
+\vspace{-0.95cm}
+
+\subtitle{LAMA: Large-MIMO approximate message passing}
+
+\vspace{0.2cm}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{We use recent methods from statistical physics and Bayesian inference in compressive sensing for large-MIMO data detection} 
+\end{center}
+\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+
+\begin{itemize}
+\item Asymptotic Gaussianity of our algorithm enables us to {\bf predict the performance and complexity in the large-antenna limit}
+\item We can show analytically that if $\beta=\MT/\MR\leq\beta^*$ for some $\beta^*$, LAMA enables us to perform individually optimal data detection
+\item Performance and complexity prediction is accomplished via the state-evolution framework of a set of coupled fixed-point equations
+\end{itemize}
+
+\holine 
+\vspace{-0.1cm}
+
+\subtitle{LAMA decouples large MIMO systems}
+\vspace{0.2cm}
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{We can analytically show that LAMA decouples a massive MIMO system into parallel and independent AWGN channels}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{figure}[tp]
+\vspace{-0.1cm}
+\centering
+\includegraphics[width=0.49\textwidth]{fig/block_MIMO3_ISIT.pdf} \hspace{-.0cm}
+\includegraphics[width=0.49\textwidth]{fig/block_decoupled3_ISIT.pdf}
+\vspace{-0.3cm}
+\end{figure}
+
+\begin{itemize}
+\item This decoupling property enables us to deploy simple, stream-wise detection methods (e.g., required for soft-output computation)
+\item This decoupling property enables LAMA to naturally support soft-input soft-output MIMO detection to achieve near-capacity performance
+\end{itemize}
+
+\holine
+\vspace{-0.1cm}
+
+\subtitle{Optimality of LAMA can be studied theoretically}
+\vspace{0.2cm}
+\begin{exampleblock}{
+\vspace{-0.4cm}
+\begin{flushleft}
+\textcolor{black}{
+	\textbf{Theorem}: The effective noise variance $\sigma_{t+1}^2$ can be computed by the recursion equation $\sigma_{t+1}^2=\No+\beta\Psi(\sigma_t^2)$, where the MSE function is $\Psi(\sigma_t^2)=\Exop_{S,Z}\!\left[\abs{\mathsf{F}(S+\sigma_tZ,\sigma_t^2)-S}^2\right]$~and~$Z\sim\setC\setN(0,1)$. Further, as $t\rightarrow\infty$, $\sigma^2_t$ converges to a fixed point of~$\sigma^2=\No+\beta\Psi(\sigma^2)$.
+}
+\end{flushleft}
+\vspace{-.2cm}
+}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{itemize}
+\item If $\beta\leq\beta^*\!=\!\min\limits_{\sigma^2>0}\!\left(\frac{\text{d}\Psi(\sigma^2)}{\text{d}\sigma^2}\right)^{\!-1}$, then LAMA converges to the \textbf{unique}, optimal fixed point and, consequently, solves the (IO) problem
+\item If $\beta>\beta^*$, then LAMA may converge to multiple fixed points and hence, convergence to (IO) is, in general, not guaranteed
+\item The use of LAMA in large MIMO is well justified as practical systems have $\MR\gg\MT$, i.e. $\beta=\MT/\MR$ is smaller than $\beta^*$
+\end{itemize}
+\vspace{0.2cm}
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{LAMA is able to perform optimal data detection in large MIMO 
+}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\vspace{0.2cm}
+% ====================================================================
+\end{column}
+% ====================================================================
+
+%% third column
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+\vspace{-1.4cm}
+
+\subtitle{LAMA achieves near-optimal performance in practical systems}
+\vspace{0.0cm}
+\begin{figure}[tp]
+\vspace{-0.1cm}
+\centering
+\includegraphics[width=0.48\textwidth]{fig/front1.pdf} \hspace{0.2cm}
+\includegraphics[width=0.47\textwidth]{fig/front2.pdf}
+\vspace{-0.3cm}
+\end{figure}
+
+\begin{itemize}
+\item LAMA also achieves {\bf near-optimal data detection performance in finite dimensional systems} (e.g., in a $128\times128$ dimensional scenario)
+\item We can also {\bf analytically predict the performance for a given complexity} (in terms of algorithm iterations) without simulations
+\end{itemize}
+
+\holine
+\vspace{-0.1cm}
+
+\subtitle{LAMA can be implemented in VLSI at low complexity}
+
+\vspace{0.2cm}
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{LAMA mainly relies on very simple matrix--vector multiplications \\ and hence, lends itself well for hardware implementations}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{minipage}[t]{0.45\textwidth}
+\begin{figure}[tp]
+\vspace{-0.1cm}
+\centering
+\includegraphics[width=\textwidth]{fig/blockdiag.pdf} 
+\vspace{-0.3cm}
+\end{figure}
+\end{minipage}
+\hspace*{0.4cm}
+\begin{minipage}[t]{0.48\textwidth}
+\begin{figure}[tp]
+\includegraphics[width=\textwidth]{fig/FG1.pdf} 
+\end{figure}
+\end{minipage}
+
+\vspace{0.1cm}
+\begin{itemize}
+\item We are currently {\bf developing a VLSI architecture} for high-throughput data detection in massive MIMO system using LAMA
+\item We are analyzing different approximations for $\mathsf{F}(\,\cdot\,,\,\cdot\,)$ and $\mathsf{G}(\,\cdot\,,\,\cdot\,)$ functions to even further reduce the implementation complexity
+\item Our planned ASIC design easily exceeds 1\,Gbps throughput at low silicon area in a 65\,nm CMOS process for a $128\times8$ system
+\end{itemize}
+\vspace{0.1cm}
+\holine
+\vspace{-0.1cm}
+\subtitle{Publications}
+\vspace{0.2cm}
+\begin{thebibliography}{10}    
+  \beamertemplatearticlebibitems
+  \bibitem{Rost} \color{black} \small
+   C. Jeon, R. Ghods, A. Maleki, C. Studer, "Optimality of Large MIMO Detection via Approximate Message Passing," submitted to the IEEE International Symposium on Information Theory, 2015
+   \bibitem{Rost} \color{black} \small
+   C. Jeon, R. Ghods, A. Maleki, C. Studer, "Optimal Data Detection in Large-MIMO," in preparation for IEEE Transactions on Information Theory
+\end{thebibliography}
+
+\vspace{-0.0cm}
+% ====================================================================
+\end{column}
+% ====================================================================
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

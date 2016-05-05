@@ -1,0 +1,270 @@
+\documentclass[sansserif,mathserif]{beamer}
+
+%\usepackage[size=a0]{beamerposter}
+
+\usepackage{cmbright}
+\usepackage[english]{babel}
+\usepackage{booktabs} %\toprule \midrule \bottomrule
+\usepackage{colortbl,subfigure}
+\usepackage{tikz,pgf,pgfplots}
+\usepgfplotslibrary{groupplots} % LATEX
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{microtype}
+\input{vmr-symbols-vecbold}
+\input{standard-macros}
+\input{defs}
+
+\usepackage{etex}
+\reserveinserts{28}
+\usepackage{epstopdf}
+\newcommand{\defn}{\ensuremath{:  =}}
+
+\def\SW{\mathsf{SWAP}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer-Poster Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usecolortheme{rose}
+%\useinnertheme[shadow]{rounded}
+%\setbeamertemplate{itemize item}[circle]
+%\setbeamertemplate{itemize subitem}[square]
+%\renewcommand{\sfdefault}{let}
+
+\usepackage{style/csposter}   % the latex poster style package
+
+% --- Re-/Definition of Fonts ------------------------------
+% redefine subtitle for poster
+\definecolor{subtitlecolor}{RGB}{178,32,37}%{0.055,0.066,0.428}
+\renewcommand{\subtitle}[1]{\vspace{6mm}{\large \bf \color{subtitlecolor} #1}}
+\newcommand{\holine}{\vspace{0.3cm} \hrule height 2pt \vspace{-0.0cm}}
+
+
+\newcommand{\tcite}[2]{[\textcolor{cornellred}{#1, #2}]}
+
+\newcommand{\bspace}{\vspace{0.2cm}}
+
+\renewcommand{\emph}[1]{\textbf{\textcolor{cornellred}{#1}}}
+
+% --- The special macros -------------------------------------------
+
+%\definecolor{tblblue}{rgb}{0.93,0.93,1.0}
+%\definecolor{tblred}{rgb}{1,0.93,0.93}
+
+\definecolor{DarkBlue}{rgb}{0.1,0.1,0.5}
+\definecolor{BrickRed}{RGB}{203,65,84}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+\frametitle{
+\color{white}{\Huge \bf Automatic Assessment Generation via Machine Learning\\[0.3cm]}
+\color{white}{\Large Arjun Jauhari, Advised by Igor Labutov, and Christoph Studer \\}
+}
+\safemath{\MT}{{M_\textnormal{T}}}
+\safemath{\MR}{{M_\textnormal{R}}}
+\safemath{\Herm}{{\textnormal{H}}}
+
+% 4 column 0.224
+% ====================================================================`
+%\vspace{-1.4cm}
+\vspace{4.0cm}
+
+% font is large
+%\large
+
+\vspace{-0.2cm}
+
+\begin{columns}
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+% ====================================================================
+
+\vspace{-1.5cm}
+\subtitle{The Problem}
+\vspace{0.1cm}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{No automatic tool available to generate an assessment through which User can test his/her skills}\end{center}\vspace{-.2cm}}
+\vspace{-0.2cm}
+\end{exampleblock}
+
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{fun.png} 
+\vspace{-0.7cm}
+\end{center}
+
+
+\begin{itemize}
+    \item Every available way requires lot of effort from a human (generally a teacher) to prepare a test
+\item Cannot be scaled in a fast manner i.e. coming up with a new test will again take equal amount of effort
+\\[0.1cm]
+\end{itemize}
+
+
+\vspace{0.0cm}
+
+
+\holine 
+\vspace{-0.1cm}
+
+\subtitle{Proposed Solution}
+\vspace{0.0cm}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{Use Machine Learning to automatically generate assessment using already available million of questions from websites like stackoverflow.com}\end{center}\vspace{-.2cm}}
+\vspace{-0.2cm}
+\end{exampleblock}
+\begin{itemize}
+    \item No more human effort required \& Can generate new assessment almost instantly
+    \item Mix of both theoretical and practical questions
+
+\end{itemize}
+
+\begin{alertblock}{\vspace{-.4cm}\begin{center}\bf \textcolor{black}{Task: To learn interesting hidden variables like difficulty of question, quality of answers, ability of users}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{alertblock}
+\vspace{0.1cm}
+
+\holine
+\vspace{-0.1cm}
+
+\subtitle{Dataset}
+\vspace{0.0cm}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{stackexchange.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\begin{itemize}
+    \item 130+ stackexchange websites, most famous one is stackoverflow.com
+    \item Number of Users = 5277830 ($\sim$ 5 million), file size 1.5GB
+    \item Number of Posts(Question + Answers) = 29499662 ($\sim$ 30 million), file size 45GB
+    \item Number of Votes = 98928934 ($\sim$ 99 million), file size 9GB
+
+\end{itemize}
+
+% ====================================================================
+\end{column}
+% ====================================================================
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+% ====================================================================
+
+\vspace{-0.95cm}
+
+\subtitle{Pre-processing of BIG DATA files}
+
+\vspace{0.2cm}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{To process these huge files I broke them into several smaller files and processed each separately} 
+\end{center}
+\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{filebreak.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\holine 
+\vspace{-0.1cm}
+
+\subtitle{Graphical Model}
+\vspace{0.2cm}
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{Used following Probabilistic Graphical model for modelling the hidden parameters}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{gm.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\begin{equation*}
+\begin{split}
+    &P(\theta, \phi | clicks) \propto P(clicks | \theta, \phi) * P(\theta,\phi)\\
+    &P(\theta, \phi | clicks) \propto P(clicks | \theta) * P(\theta | \phi)
+    * P(\theta)\\
+    &P(click = k | \theta_1, ..., \theta_n) = \frac{exp(\theta_k)}{exp(\theta_1) + ... + exp(\theta_n)} \\
+    &P(\theta_i | \phi_j) \sim \mathcal{N}(\phi_j, \sigma^2) \\
+    %&P(\theta_i | \phi_j) = \frac{1}{\sqrt{2\pi\sigma^2}} exp(\frac{-|\theta_i - \phi_j|^2}{2\sigma^2}) \\
+    &P(\phi_j) \sim \mathcal{N}(0, \sigma^2) \\
+\end{split}
+\end{equation*}\\
+
+\vspace{0.2cm}
+% ====================================================================
+\end{column}
+% ====================================================================
+
+%% third column
+
+% ====================================================================
+\begin{column}{0.309\textwidth}
+\vspace{-1.4cm}
+
+\subtitle{Time line of a typical question}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{results_ver2/longVote_TL.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\begin{itemize}
+        \item Figure shows the entire history of a particular question capturing number of answers
+        \item Each dot captures a click event (UpVote/DownVote)
+        \item Height corresponds to answer number
+\end{itemize}
+
+\holine
+\vspace{-0.2cm}
+
+\subtitle{Learned Quality for every answer in above time line}
+
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{results_ver2/longVote_SOL.png} 
+\vspace{-0.7cm}
+\end{center}
+\vspace{0.2cm}
+
+\holine
+\vspace{-0.2cm}
+\subtitle{Cumulative Histogram of \# of Answers vs Users}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{results_ver2/so_user_anscnt_hist.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\holine
+\vspace{-0.2cm}
+\subtitle{Other Applications}
+\vspace{0.0cm}
+
+\begin{itemize}
+        \item Get the ranking of all the Users
+        \item Obtain learning curve of Users
+\end{itemize}
+% ====================================================================
+\end{column}
+% ====================================================================
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

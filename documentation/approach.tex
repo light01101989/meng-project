@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{amsmath, amssymb, amsthm, graphicx, float}
+\usepackage{subfig, subfloat}
+\allowdisplaybreaks
+
+\begin{document}
+\section{Approach}
+To address above mentioned issues a statistical approach is considered 
+where first step is to identify the features which are relevant for the model.
+Secondly, model needs to learn the parameters which govern the interaction
+between these features.
+Below I describe the model.
+\subsection{Subscripts}
+\begin{itemize}
+    \item $i$ is subscript for question.
+    \item $j$ is subscript for answer.
+    \item $k$ is subscript for user.
+\end{itemize}
+\subsection{Notations}
+\begin{enumerate}
+    \item $u_k$: Quality measure of the $k$th user.
+    \item $q_i$: Quality measure of the $i$th question.
+    \item $va_{ij}$: Normalized votes corresponding to $j$th answer of $i$th question. \\
+        Calculated as: $va_{ij} = \frac{|sa_{ij}|}{\sum_{j} |sa_{ij}|}$ \\
+        where $sa_{ij}$ is the actual votes(score) read from data dump.
+    \item $a_{ijk}$: Quality measure of $a_{ij}$th answer given by the $k$th user.
+    \item $f_{acc}^{ij}$: Boolean flag telling if this answer was Accepted, read from data dump.
+    \item $r_k$: Reputation of the $k$th user, read from data dump.
+    \item $N_{a}^{i}$: Number of answer to $i$th question, read from data dump.
+    \item $vq_{i}$: Number of votes to $i$th question, read from data dump.
+\end{enumerate}
+
+\subsection{Equations}
+Below equations model the relation/dependence between
+the above defined parameters. \\
+Bold values are known features.
+All the features were scaled between 0 \& 1 \\
+\begin{enumerate}
+    \item $a_{ijk} = f_a(u_k, \mathbf{va_{ij}}, \mathbf{f_{acc}^{ij}})$ \\
+        $a_{ijk} = 1/3*u_k + 1/3*\mathbf{va_{ij}} + 1/3*\mathbf{f_{acc}^{ij}}$
+    \item $u_k = f_u(\{a_{ijk}\}_{ij}, \{q_i\}_k, \mathbf{r_k})$ , where $\{a_{ijk}\}_{ij}$
+        is set of all answers by user k\\
+        $u_k = 1/3*mean\{a_{ijk}\}_{ij} + 1/3*mean\{q_i\}_k + 1/3*\mathbf{r_k}$
+    \item $q_i = f_q(u_k, \mathbf{N_{a}^{i}}, \mathbf{vq_i}, \mathbf{\sum_{j} |sa_{ij}|})$, where $\sum_{j} |sa_{ij}|$
+        is sum of votes for all the answers of $i$th question \\
+        $q_i = 1/4*u_k + 1/4*\mathbf{N_{a}^{i}}+ 1/4* \mathbf{vq_i} + 1/4*\mathbf{\sum_{j} |sa_{ij}|}$
+\end{enumerate}
+
+\section{Status}
+Currently, the model is very simple with $va_{ij} = \frac{|sa_{ij}|}{\sum_{j} |sa_{ij}|}$, where $sa_{ij}$ is the actual votes(score) read from data dump.\\
+and $a_{ijk} = w_1*u_k + w_2*q_i + w_3*va_{ij} + w_4*f_{acc}^{ij}$ \\
+\\
+As of now weights $w_1, w_2, w_4$ are 0 and $w_3$ is 1, so $a_{ijk} = va_{ij}$ \\
+\\
+User quality is being modeled as: $u_k \sim \mathcal{N} (mean(\{a_{ijk}\}_{ij}), Var(\{a_{ijk}\}_{ij}))$ \\
+\\
+Question quality is still not modeled.
+
+\end{document}
+

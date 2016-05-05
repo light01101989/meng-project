@@ -1,0 +1,255 @@
+
+\newcommand{\marginnote}[1]{\marginpar{\framebox{\framebox{#1}}}}
+% Comment macro: Usage \comment{Author}{Comment}
+\newcommand{\comment}[2]{[\marginnote{#1}\textit{#1}:\ \textit{#2}]}
+
+% \newcommand{\bra}[1]{#1^H}
+% \newcommand{\ket}[1]{#1}
+% \newcommand{\innerp}[2]{#1^H#2}
+% \newcommand{\outerp}[2]{#1#2^H}
+% \newcommand{\matrixel}[3]{#1^H#2#3}
+% \newcommand{\proj}[1]{\outerp{#1}{#1}}
+% \newcommand{\abs}[1]{\vert#1\vert}
+% 
+% 
+% %norms
+% \newcommand{\norm}[2]{\left\Vert#1\right\Vert_{#2}}
+% 
+% %a matrix or vector
+% \newcommand{\mat}[2]{\lefto[\begin{array}{#1}#2\end{array}\right]}
+% 
+% %mathbf etc.
+% \newcommand{\mbf}{\mathbf}
+% \newcommand{\mbb}{\mathbb}
+% \newcommand{\mcl}{\mathcal}
+ \newcommand{\trm}{\textrm}
+% 
+% 
+% %Theorems, etc.
+% %\theoremstyle{definition}
+% \theoremstyle{plain}
+%
+% 
+% %Expectation
+% \newcommand{\expect}[1]{\langle#1\rangle}
+% 
+% %Trace
+% \DeclareMathOperator{\tr}{tr}
+% \DeclareMathOperator{\Tr}{Tr}
+% 
+% %Miscellaneous stuff
+% \DeclareMathOperator{\supp}{supp}
+% \DeclareMathOperator{\Span}{span}
+% 
+% %identity
+% \DeclareMathOperator{\id}{\mathbf{1}}
+% 
+% %BS addition
+% \DeclareMathOperator{\bst}{\stackrel{\land}{+}}
+% \DeclareMathOperator{\bs}{\widehat{+}}
+% 
+% %ladder operators
+% \newcommand{\up}{a^\dagger}
+% \newcommand{\down}{a}
+% 
+% %vec operator
+% %\DeclareMathOperator{\vect}{vec}
+% 
+% %equations
+% \def\ba#1\ea{\begin{align*}#1\end{align*}}
+% %with numeration
+% \def\ban#1\ean{\begin{align}#1\end{align}}
+% % the same, centered
+% \def\bac#1\eac{\vspace{\abovedisplayskip}{\par\centering$\begin{aligned}#1\end{aligned}$\par}\addvspace{\belowdisplayskip}}
+
+%%%%% parentheses denoting arguments, we want an opening object. Use \lefto in
+%%%%% these cases.
+% \newcommand{\lefto}{\mathopen{}\left}
+% 
+% %real and imaginary part
+% \renewcommand{\Re}{\mathfrak{Re}}
+% \renewcommand{\Im}{\mathfrak{Im}}
+% 
+% % in case you need to break equations over several lines
+ \newcommand{\dummyrel}[1]{\mathrel{\hphantom{#1}}\strut\mskip-\medmuskip}
+%%%%%%%%%%%%%%%%%%%%%
+%:- Theorems
+ \newtheorem{thm}{Theorem}
+ \newtheorem{cor}[thm]{Corollary}   % Turned off theorem numbering
+ \newtheorem{prop}{Proposition}
+ \newtheorem{defi}{Definition}
+ \newtheorem{lem}[thm]{Lemma}
+ \newtheorem{exmpl}{Example}
+% \newtheorem{st}{Statement}
+% \newtheorem{conj}{Conjecture}
+
+%%%%%
+%% robust recovery from sparse noise
+\safemath{\dictab}{[\,\dicta\,\,\dictb\,]}
+
+
+\safemath{\ysig}{\bmy}
+\safemath{\ysighat}{\hat{\ysig}}
+\safemath{\ysigdim}{M}
+%
+\safemath{\xsig}{\bmx}
+\safemath{\xsigdim}{N}
+\safemath{\nx}{n_x}
+%
+\safemath{\zsig}{\bmz}
+\safemath{\zsigdim}{\ysigdim}
+%
+\safemath{\rsig}{\bmr}
+%
+\safemath{\Adict}{\bA}
+\safemath{\Adicttilde}{\widetilde{\Adict}}
+\safemath{\Adictdim}{\outputdim\times\xsigdim}
+\safemath{\avec}{\bma}
+\safemath{\avectilde}{\tilde{\avec}}
+%
+\safemath{\Bdict}{\bB}
+\safemath{\Bdicttilde}{\widetilde{\Bdict}}
+%
+\safemath{\Cdict}{\bC}
+\safemath{\cvec}{\bmc}
+%
+\safemath{\Ddict}{\bD}
+\safemath{\Ddictdim}{\ysigdim\times\xsigdim}
+\safemath{\dvec}{\bmd}
+\safemath{\Ddicttilde}{\widetilde{\bD}}
+%
+\safemath{\Bonb}{\bB}
+\safemath{\bvec}{\bmb}
+\safemath{\Bonbdim}{\ysigdim\times\ysigdim}
+%
+\safemath{\noise}{\bmn}
+\safemath{\noisedim}{\ysigim}
+%
+\safemath{\err}{\bme}
+\safemath{\errdim}{\ysigdim}
+\safemath{\errset}{\setE}
+\safemath{\nerr}{n_e}
+%
+\safemath{\delop}{\bP_\errset}
+\safemath{\delopc}{\bP_{{\errset}^c}}
+
+%
+
+
+
+
+%%
+% Complex i and j 
+\safemath{\cplxi}{\imath}
+\safemath{\cplxj}{\jmath}
+% Comb signal
+%\safemath{\comb}{\matI\matI\matI}
+\newcommand{\comb}[1]{\vecdelta_{#1}}
+%:- Definition dictionary
+\safemath{\dict}{\matD}
+\safemath{\inputdim}{N}		% number of columns of dictionary D
+\safemath{\outputdim}{M}		%number of rows of dictionary D
+\safemath{\sparsity}{S}	%sparsity
+\safemath{\inputdimA}{{N_a}}	%total number of elements in dictionary A
+\safemath{\inputdimB}{{N_b}}	%total number of elements in dictionary B
+\safemath{\elemA}{{n_a}}	%number of elements chosen from dictionary A
+\safemath{\elemB}{{n_b}}	%number of elements chosen from dictionary B
+\safemath{\resA}{\matR_a}	%restriction map to elements of dictionary A
+\safemath{\resB}{\matR_b}	%restriction map to elements of dictionary B
+\safemath{\subD}{\matS} %subdictionary
+\safemath{\subA}{\matS_a} %subdictionary part of A
+\safemath{\subB}{\matS_b} %subdictionary part of B
+\safemath{\dicta}{\matA} 	% first subdictionary
+\safemath{\dictb}{\matB} 	% second subdictionary
+\safemath{\hollowS}{H}
+\safemath{\hollowA}{H_a}
+\safemath{\hollowB}{H_b}
+\safemath{\cross}{Z}
+\safemath{\coh}{\mu_d}			% coherence dictionary
+\safemath{\coha}{\mu_a}			% coherence first subdictionary
+\safemath{\cohb}{\mu_b}			% coherence second subdictionary
+\safemath{\mubs}{\nu}	%block sub-coherence
+\safemath{\cohm}{\mu_m} %mutual coherence
+\safemath{\dictset}{\setD}	% set of dictionaries
+\safemath{\dictsetp}{\dictset(\coh,\coha,\cohb)}	% set of dictionaries parametrized
+\safemath{\dictsetgen}{\dictset_\text{gen}}
+\safemath{\dictsetgenp}{\dictsetgen(\coh)}
+\safemath{\dictsetonb}{\dictset_\text{onb}}
+\safemath{\dictsetonbp}{\dictsetonb(\coh)}
+
+\safemath{\leftside}{U}
+\safemath{\rightsideA}{R_a}
+\safemath{\rightsideB}{R_b}
+
+\safemath{\indexS}{\setI_S} %set of indices participating in sub-dictionary S
+
+
+\safemath{\na}{n_a}			% cardinality of set of linearly independent columns of first dictionary
+\safemath{\nb}{n_b}			% cardinality of set of linearly independent columns of second dictionary
+\safemath{\coeffa}{p_i}	%coefficients for columns of A
+\safemath{\coeffb}{q_j}	%coefficients for columns of B
+\safemath{\seta}{\setP}		% set of linearly independent columns of A
+\safemath{\setb}{\setQ}     % set of linearly independent columns of B
+\safemath{\setw}{\setW}	%set of n largest elements of w
+\safemath{\setz}{\setZ}	%set of L-n largest elements of z
+\safemath{\cola}{\veca}		% generic element of the dictionary A
+\safemath{\colb}{\vecb}		% generic element of the dictionary B
+\safemath{\cold}{\vecd}		% generic element of the dictionary D
+\safemath{\inputvec}{\vecx} 	%coefficient vector (input)
+\safemath{\error}{\vece}	%error vector
+\safemath{\noiseout}{\vecz} 	%noisy output vector
+\safemath{\inputvecel}{x}
+\safemath{\inputveca}{\vecx_a}
+\safemath{\inputvecb}{\vecx_b}
+\safemath{\outputvec}{\vecy}	%output of Dictionary
+\safemath{\lambdamin}{\lambda_{\mathrm{min}}}
+%:- Math operators
+\DeclareMathOperator{\spark}{spark}
+\newcommand{\pos}[1]{\lefto[#1\right]^+}
+\newcommand{\normtwo}[1]{\vecnorm{#1}_2}
+\newcommand{\normone}[1]{\vecnorm{#1}_1}
+\newcommand{\normzero}[1]{\vecnorm{#1}_0}
+\newcommand{\norminf}[1]{\vecnorm{#1}_\infty}
+\newcommand{\normfro}[1]{\vecnorm{#1}_\text{F}}
+%\newcommand{\spectralnorm}[1]{\vecnorm{#1}_{2,2}}
+\newcommand{\spectralnorm}[1]{\vecnorm{#1}}
+\safemath{\elltwo}{\ell_2}
+\safemath{\ellone}{\ell_1}
+\safemath{\ellzero}{\ell_0}
+\safemath{\ellinf}{\ell_\infty}
+\safemath{\licard}{Z(\coh,\coha,\cohb)}
+\safemath{\xsol}{\hat{x}}
+\safemath{\xbord}{x_b}		%Solution at the border
+\safemath{\xstat}{x_s}		%Solution stationary in l0 prob
+\safemath{\xstatLone}{\tilde{x}_s}
+\safemath{\order}{\mathcal{O}} %order notation (big O)
+\safemath{\scales}{\Theta} %scales as
+%
+\safemath{\ones}{\mathbf{1}} %all ones matrix
+\safemath{\zeroes}{\mathbf{0}} %all zeroes matrix
+%
+\safemath{\thlone}{\kappa(\coh,\cohb)} %treshold l1 problem
+\safemath{\constoneA}{\delta} %constant in l1 theorem to save space
+\safemath{\constoneB}{\epsilon} %constant in l1 theorem to save space
+\safemath{\nlarge}{L}				   %num large elements
+\safemath{\sumlarge}{S_\nlarge}
+\DeclareMathOperator{\kernel}{kern}	   % kernel of a matrix
+\safemath{\maxlarger}{P_\nlarge}	   % maximum in Gribonval and Nielsen
+\safemath{\Pzero}{\textrm{P0}}	
+\safemath{\Pone}{\textrm{P1}}
+\safemath{\vecfir}{\vecw}			 % \vecv element of the kernel of the dictionary, \vecv=[\vecfir \vecsec]
+\safemath{\vecsec}{\vecz}
+\safemath{\elvecfir}{w}              % element of vecfir
+\safemath{\elvecsec}{z}				 % element of vecsec
+\safemath{\nlargefir}{n}
+\safemath{\normout}{\gamma}
+\safemath{\auxfun}{h}
+\safemath{\supp}{\textrm{supp}}%support
+
+\safemath{\indexa}{\ell}
+\safemath{\indexb}{r}
+\safemath{\indexc}{i}
+\safemath{\indexd}{j}
+
+
+\safemath{\project}{P}%projector

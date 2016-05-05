@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Footer of Poster for Beamer Class
+%  =================================
+%  Peter Luethi, 2006/05/09, Integrated Systems Laboratory, ETH Zurich, Switzerland
+%  last update: 2006/05/12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\myFooterHeight}{1.7cm}          % specify height of footer box
+
+\begin{center}
+\colorbox{lightblue}
+{
+ \color{black}
+ \parbox[c][\myFooterHeight]{0.982\textwidth}  % get colorbox-width = \textwidth
+ {
+  \parbox[c]{0.30\textwidth}
+  {
+   \begin{flushleft}
+   \includegraphics[height=1.4cm]{eth_logos/eth_logo_white}
+   \end{flushleft}
+  }
+  \parbox[c]{0.42\textwidth}
+  {
+   \begin{center} \normalsize
+   \textcolor{white}{International Conference on Acoustics, Speech, and Signal Processing (ICASSP) \\ March 2012, Kyoto, Japan}
+   \end{center}
+  }
+  \parbox[r]{0.25\textwidth}  % leave space at right
+  {
+   \begin{flushright}
+    %\IISinstitute
+    \textcolor{white}{\DITET}
+   \end{flushright}
+  }
+ }
+}
+\end{center}
+
+

@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  IIS Poster Style to create Latex A0 Posters
+%  ===========================================
+%  Peter Luethi, 2006/05/09, Integrated Systems Laboratory, ETH Zurich, Switzerland
+%  last update: 2007/10/14
+%
+%  Important Notes
+%  ---------------
+%  The default 'Beamer-Poster' document is top-aligned (documentclass[t]{beamer}).
+%  Default font size of beamer class is 11pt. Within this document a font size
+%  of 12pt is appropriate for dense posters.
+%  If you have less content, consider using 14pt, 17pt, 20pt...
+%
+%  Bugs / Precautions
+%  ------------------
+%  Within the poster content, prevent the use of top-aligned multi-columns
+%  (top-alignment is done centrally at the main file with documentclass[t]):
+%  Don't use \begin{column}[t], instead specify nothing or [c] (centered).
+%  Otherwise, Latex (i.e. the beamer class) messes up with the vertical
+%  alignement in the poster (frame)...
+%
+%  Description:
+%  To provide a LATEX style for posters from the Integrated Systems Laboratory
+%  ETH Zurich, Switzerland
+%
+%  Revision history:
+%  2006/05/12 PL  initial release
+%  2007/10/14 PL  added A3 landscape
+%  $Log$
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust the Papersize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % A3 portrait
+%  \setlength{\paperwidth}{29.7cm}
+%  \setlength{\paperheight}{42.0cm}
+%  \setlength{\textwidth}{27.6cm}
+%  \setlength{\textheight}{40cm}
+% % %\setlength{\hoffset}{-0.0cm}    % shouldn't be necessary to use...
+% % %\setlength{\voffset}{-0.0cm}    % shouldn't be necessary to use...
+
+% A3 landscape
+\setlength{\paperheight}{29.7cm}
+\setlength{\paperwidth}{42.0cm}
+\setlength{\textheight}{27.6cm}
+\setlength{\textwidth}{40cm}
+
+% A2 landscape
+% \setlength{\paperheight}{42.1cm}
+% \setlength{\paperwidth}{59.9cm}
+% \setlength{\textheight}{42cm}
+% \setlength{\textwidth}{58.9cm}
+
+%\setlength{\hoffset}{-0.0cm}    % shouldn't be necessary to use...
+%\setlength{\voffset}{-0.0cm}    % shouldn't be necessary to use...
+
+% Don't use these two commands! Everything breaks...
+%\setbeamersize{text margin left=1cm}
+%\setbeamersize{text margin right=1cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust the Fontsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\renewcommand{\normalsize}{\Large}
+%\def\regularsize{\@setfontsize\normalsize{34pt}{37}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros & Color Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Definition of short-cuts/macros ------------------------------
+\newcommand{\copyr}{\textcopyright\xspace}
+\newcommand{\tm}{\texttrademark\xspace}
+\newcommand{\reg}{\textsuperscript{\textregistered}\xspace}
+
+\newcommand{\IISinstitute}{\sffamily \slshape \small
+    Communication Technology Laboratory \\
+    Integrated Systems Laboratory}
+    
+\newcommand{\DITET}{\sffamily \slshape \small
+    Department of Information Technology \\[-0.2cm] 
+    and Electrical Engineering}
+
+% --- Definition of colors -----------------------------------------
+\definecolor{black}{RGB}{0,0,0}
+%\definecolor{lightblue}{RGB}{176,217,230}
+%\definecolor{lightblue}{RGB}{96,128,232}
+\definecolor{lightblue}{RGB}{101,124,191}
+
+\definecolor{skyblue}{RGB}{135,206,235}
+\definecolor{gold}{RGB}{204,168,66}
+\definecolor{strongblue}{RGB}{60,146,228}
+\definecolor{lightgray}{gray}{0.5}
+\definecolor{verylightgray}{gray}{0.9}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header Redefinition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\myHeaderHeight}{3.0cm}     % specify height of title box
+\newcommand{\myFooterHeight}{2.0cm}     % specify height of footer box
+
+
+% --- Head & Footline ----------------------------------------------
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% --- Customized Frametitle ----------------------------------------
+%\useoutertheme{shadow}
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=lightblue}
+%\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{frametitle}{size=\Huge}  % still too small for poster
+
+
+%%%%
+\setbeamercolor{item projected}{parent=item,use=item,fg=white,bg=lightgray}
+% these commands set the shape and the color of the itemize bullets
+\setbeamertemplate{itemize item}{\textcolor{lightgray}{\rule{5pt}{5pt}}}
+\setbeamertemplate{itemize subitem}{\textcolor{lightgray}{\rule{4pt}{4pt}}}
+\setbeamertemplate{itemize subsubitem}{\rule{2pt}{2pt}}
+\setbeamertemplate{enumerate items}[square]
+
+\setbeamercolor{block title}{use=structure,fg=black,bg=lightblue}
+\setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+\setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=verylightgray}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+\setbeamercolor{palette primary}{use=structure,fg=black,bg=lightblue}
+\setbeamercolor{palette secondary}{use=structure,fg=black,bg=structure.fg!25!white}
+\setbeamercolor{palette tertiary}{use=structure,fg=black,bg=structure.fg!30!white}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=structure.fg!35!white}
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+
+%%%%%
+
+\setbeamertemplate{frametitle}
+{
+ \input{style/header}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example of IIS institute header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   \parbox[c]{9cm}
+%   {
+%    \begin{center}
+%    \hrule
+%    \vspace*{3pt}         % *: space is never removed by Latex
+%    \small \IISinstitute
+%    \vspace*{2pt}         % *: space is never removed by Latex
+%    \hrule
+%    \end{center}
+%   }
+
+\pagestyle{empty}

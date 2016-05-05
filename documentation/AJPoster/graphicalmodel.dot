@@ -1,0 +1,15 @@
+digraph G {
+    compound=true;
+    subgraph cluster0 {
+        User[label="User (Phi)"]
+        subgraph cluster1 {
+            Ans[label="Answer (Theta)"]
+            subgraph cluster2 {
+                node [style=filled,color=red];
+                click[label="Click (UpVote/DownVote)"]
+            }
+        }
+        User -> Ans;
+        Ans -> click;
+    }
+}
