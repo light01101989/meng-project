@@ -14,6 +14,9 @@
 ### Dataset
 ![alt text](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/stackexchange.png "Dataset")
 
+### Poster
+![alt text](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/AJPoster.png "Poster")
+
 ### Project Notes
 [Click Here!!](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/ProjectNotes.pdf)
 
