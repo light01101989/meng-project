@@ -1,0 +1,19 @@
+digraph G {
+    Big[label="BigData File"]
+    Spl[label="Split..."]
+    TempFile1[label="TempFile 1"]
+    TempFile2[label="TempFile 2"]
+    TempFilen[label="TempFile n"]
+    Pros[label="Processing one at a time : extracting informative attributes"]
+    Join[label="Joining..."]
+    Final[label="Compressed file"]
+    Big -> Spl;
+    Spl -> TempFile1;
+    Spl -> TempFile2;
+    Spl -> TempFilen;
+    TempFile1 -> Pros;
+    TempFile2 -> Pros;
+    TempFilen -> Pros;
+    Pros -> Join;
+    Join -> Final;
+}
