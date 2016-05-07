@@ -5,7 +5,7 @@
 ![alt text](https://github.com/light01101989/meng-project/blob/master/documentation/AJPoster/stackexchange.png "Dataset")
 
 ### Model Structure
-Scripts are in ver2 folder. Call "python <filename>.py -h" for more help
+Scripts are in ver2 folder. Call "python ver2/main.py -h" for more help.
 ![alt text](https://github.com/light01101989/meng-project/blob/master/documentation/dotGraph/fileTreedetail.png "ModelStructure")
 
 ### Poster
