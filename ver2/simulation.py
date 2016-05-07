@@ -123,6 +123,25 @@ def genHist(N, cDist):
 
     return voteHist
 
+def adaGradUser(initialGuess, *args):
+    initialLR = 0.9
+    accumGrad = np.zeros_like(initialGuess)
+    bound = 0.10011
+    funcVal, grad = objFuncUser(initialGuess, *args)
+    out = initialGuess
+    cnt = 0
+    # while not converged
+    pdb.set_trace()
+    while np.linalg.norm(grad) > bound and cnt < 300:
+        funcVal, grad = objFuncUser(out, *args)
+        accumGrad += np.square(grad)
+        adjGrad = grad/np.sqrt(accumGrad)
+        out = out - initialLR*adjGrad
+        cnt += 1
+        print "%d : %f : %f" % (cnt,funcVal,np.linalg.norm(grad))
+    print "numIteration: ",cnt
+    return out
+
 def objFuncUser(thetaVec, *args):
     # get from args
     uaidx = args[0]
@@ -361,19 +380,18 @@ def runTestUser(N):
         qaidx[np.floor(i/numAnsPques)].append(i)
         uaidx[i%numAnsPques].append(i)
 
-    pdb.set_trace()
     print "qaidx",qaidx
     print "uaidx",uaidx
     print "uphiidx",uphiidx
     # generate clicks for each ques
-    for i in xrange(numQues):
+    for i in xrange(numAnsPuser):
         pDens = np.exp(Theta[:,i])/np.sum(np.exp(Theta[:,i]))
         cDist = np.cumsum(pDens)
         qvHist[i] = genHist(N, cDist)
 
-    #print "qvHist",qvHist
+    print "qvHist",qvHist
 
-    pdb.set_trace()
+    #pdb.set_trace()
     # optimize
     initialVal = np.ones(totalAns+nUser)*0.1
     #print "Error with User:"
@@ -381,6 +399,9 @@ def runTestUser(N):
     #sol, f, d = optimize.fmin_l_bfgs_b(objFuncUser, initialVal, approx_grad=1, args=(uaidx, qaidx, uphiidx, qvHist), disp=1)
     sol, f, d = optimize.fmin_l_bfgs_b(objFuncUser, initialVal, args=(uaidx, qaidx, uphiidx, qvHist), disp=0)
 
+    print sol
+    sol2 = adaGradUser(initialVal, uaidx, qaidx, uphiidx, qvHist)
+    print sol2
     #print Phi
     #print sol
     #print kendalltau(Phi,sol[100:110])

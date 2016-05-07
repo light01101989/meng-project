@@ -2,12 +2,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
-import pdb
+import os
 
 def filterPosts(minPosts,minUsers):
     # open file to read
-    p = open('final-Posts.csv', 'r')
-    u = open('final-Users.csv', 'r')
+    p = open('breakFiles/final-Posts.csv', 'r')
+    u = open('breakFiles/final-Users.csv', 'r')
 
     # make array of upvotes
     user_pcnt = {}
@@ -102,8 +102,8 @@ def filterPosts(minPosts,minUsers):
 
     print "Filtering Now......................"
     # Open new files for writing
-    wp = open('filterPosts.csv', 'w')
-    wu = open('filterUsers.csv', 'w')
+    wp = open('filterFiles/filterPosts.csv', 'w')
+    wu = open('filterFiles/filterUsers.csv', 'w')
 
     p.seek(0)
     c=0
@@ -150,7 +150,7 @@ def filterPosts(minPosts,minUsers):
     p.close()
     u.close()
 
-parser = argparse.ArgumentParser(description='Script to filter Users and Posts based on minPosts and minUsers')
+parser = argparse.ArgumentParser(description='Script to filter Users and Posts based on minPosts and minUsers. Should be called from datasets/<xyz> directory')
 parser.add_argument('-p','--minpost', help='Minimum number of post for user to qualify(inclusive)',required=True)
 parser.add_argument('-u','--minuser', help='Minimum number of qualified user in a Q/A pair(inclusive)', required=True)
 args = parser.parse_args()
@@ -158,4 +158,16 @@ args = parser.parse_args()
 ## show values ##
 #print ("minPosts: %s" % args.minpost )
 #print ("minUsers: %s" % args.minuser )
+
+# Make directory if not present
+d = "filterFiles"
+if not os.path.exists(d):
+    os.makedirs(d)
+
+# Write flag file
+wf = open('filterFiles/filterFlags.txt', 'w')
+wf.write("minPosts:%s\n" % args.minpost)
+wf.write("minUsers:%s\n" % args.minuser)
+wf.close()
+
 filterPosts(int(args.minpost),int(args.minuser))
