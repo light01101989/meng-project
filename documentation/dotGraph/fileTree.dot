@@ -1,4 +1,6 @@
 digraph G {
+    nodes[ranksep=0.75,nodesep=0.75];
+    graph[size="9.75,7.25"]; 
     main[label="main.py"]
     breakFiles[label="breakFiles_compress.py"]
     pa[label="prune_attributes.py"]
@@ -7,12 +9,12 @@ digraph G {
     runBigData[label="runBigData.py"]
     simulation[label="simulation.py"]
     //finalU[label="final-Users.csv",shape=box]
-    finalP[label="final-Posts.csv\nfinal-Users.csv",shape=box]
-    finalV[label="final-Votes.csv",shape=box]
+    finalP[label="final-Posts.csv\nfinal-Users.csv\nfinal-Votes.csv",shape=box]
+    //finalV[label="final-Votes.csv",shape=box]
     getU[label="get-Users.sh"]
     getP[label="get-Posts.sh"]
     getV[label="get-Votes.sh"]
-    filterP[label="filterPosts.csv\nfilterUsers.csv",shape=box]
+    filterP[label="filterPosts.csv\nfilterUsers.csv\nfilterVotes.csv",shape=box]
     //filterU[label="filterUsers.csv",shape=box]
     sbdout[label="qaidx.pkl\nuaidx.pkl\naidtoaidx.pkl\nuphiidx.pkl\nqvHist.pkl",shape=box]
     sol[label="user_solved.csv",shape=box]
@@ -22,7 +24,7 @@ digraph G {
     main -> runBigData[label="Calls"];
     //breakFiles -> finalU[label="Out",style=dotted];
     breakFiles -> finalP[label="Out",style=dotted];
-    breakFiles -> finalV[label="Out",style=dotted];
+    //breakFiles -> finalV[label="Out",style=dotted];
     breakFiles -> pa[label="Calls"];
     pa -> getU[label="Calls"];
     pa -> getP[label="Calls"];
@@ -32,7 +34,7 @@ digraph G {
     runBigData -> simulation[label="Calls"];
     filterPosts -> filterP[label="Out",style=dotted];
     //filterPosts -> filterU[label="Out",style=dotted];
-    finalV -> structureBigData[label="Input",style=dotted];
+    //finalV -> structureBigData[label="Input",style=dotted];
     filterP -> structureBigData[label="Input",style=dotted];
     //filterU -> structureBigData[label="Input",style=dotted];
     structureBigData -> sbdout[label="Out",style=dotted];

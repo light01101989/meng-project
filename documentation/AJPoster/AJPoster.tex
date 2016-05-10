@@ -95,23 +95,23 @@
 
 \vspace{-0.3cm}
 \begin{center}
-\includegraphics[width=0.7\textwidth]{fun2.png} 
+\includegraphics[width=0.6\textwidth]{fun2.png} 
 \vspace{-0.7cm}
 \end{center}
 
 
 \begin{itemize}
     \item Available methods to generate/prepare a test requires an excessive amount of human (generally a teacher or domain expert) effort 
-\item The traditional approach to assessment generation does not scale to test in multiple fields or even personalized tests
+    \item The traditional approach to assessment generation does not scale to test in multiple fields or even personalized tests
 \\[0.1cm]
 \end{itemize}
 
 
-\vspace{0.0cm}
+\vspace{-0.2cm}
 
 
 \holine 
-\vspace{-0.1cm}
+\vspace{-0.2cm}
 
 \subtitle{Proposed Solution}
 \vspace{0.0cm}
@@ -159,7 +159,35 @@
 
 \vspace{-0.95cm}
 
-\subtitle{Pre-processing of Big Data}
+\subtitle{Algorithm: Statistical model for answer quality and user ability}
+\vspace{0.2cm}
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{We used the following probabilistic graphical \\ model to characterize the hidden parameters of interest}\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{gm.png} 
+\vspace{-0.7cm}
+\end{center}
+
+\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{Parameters we learn are $\theta$ (Quality of Answer) \& $\phi$ (Ability of User) \\ Below equations model the conditional dependence }\end{center}\vspace{-.2cm}}
+\vspace{-0.15cm}
+\end{exampleblock}
+
+\begin{itemize}
+    \item $P(\theta, \phi | clicks) \propto P(clicks | \theta, \phi) * P(\theta,\phi)$\\
+    \item $P(\theta, \phi | clicks) \propto P(clicks | \theta) * P(\theta | \phi)
+    * P(\theta)$\\
+   \item  $P(click = k | \theta_1, ..., \theta_n) = \frac{exp(\theta_k)}{exp(\theta_1) + ... + exp(\theta_n)}$ \\
+   \item  $P(\theta_i | \phi_j) \sim \mathcal{N}(\phi_j, \sigma^2)$ \\
+   %\item  &P(\theta_i | \phi_j) = \frac{1}{\sqrt{2\pi\sigma^2}} exp(\frac{-|\theta_i - \phi_j|^2}{2\sigma^2}) \\
+   \item  $P(\phi_j) \sim \mathcal{N}(0, \sigma^2)$ \\
+\end{itemize}
+
+\holine 
+\vspace{-0.1cm}
+
+\subtitle{Pre-processing of Big Data \& Implementation Details}
 
 \vspace{0.2cm}
 
@@ -170,35 +198,11 @@
 \end{exampleblock}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{filebreak.png} 
+\vspace{-0.3cm}
+\includegraphics[width=0.49\textwidth]{filebreak.png} \hspace{-.0cm}
+\includegraphics[width=0.49\textwidth]{fileTreedetail.png}
 \vspace{-0.7cm}
 \end{center}
-
-\holine 
-\vspace{-0.1cm}
-
-\subtitle{Algorithm: Statistical model for answer quality and user ability}
-\vspace{0.2cm}
-\begin{exampleblock}{\vspace{-.4cm}\begin{center}\textcolor{black}{We used the following probabilistic graphical \\ model to characterize the hidden parameters of interest}\end{center}\vspace{-.2cm}}
-\vspace{-0.15cm}
-\end{exampleblock}
-
-\begin{center}
-\includegraphics[width=0.7\textwidth]{gm.png} 
-\vspace{-0.7cm}
-\end{center}
-
-\begin{equation*}
-\begin{split}
-    &P(\theta, \phi | clicks) \propto P(clicks | \theta, \phi) * P(\theta,\phi)\\
-    &P(\theta, \phi | clicks) \propto P(clicks | \theta) * P(\theta | \phi)
-    * P(\theta)\\
-    &P(click = k | \theta_1, ..., \theta_n) = \frac{exp(\theta_k)}{exp(\theta_1) + ... + exp(\theta_n)} \\
-    &P(\theta_i | \phi_j) \sim \mathcal{N}(\phi_j, \sigma^2) \\
-    %&P(\theta_i | \phi_j) = \frac{1}{\sqrt{2\pi\sigma^2}} exp(\frac{-|\theta_i - \phi_j|^2}{2\sigma^2}) \\
-    &P(\phi_j) \sim \mathcal{N}(0, \sigma^2) \\
-\end{split}
-\end{equation*}\\
 
 \vspace{0.2cm}
 % ====================================================================
@@ -211,7 +215,7 @@
 \begin{column}{0.309\textwidth}
 \vspace{-1.4cm}
 
-\subtitle{Time-line of a typical question}
+\subtitle{Time-line of a typical question in Real Data}
 \vspace{-0.3cm}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{results_ver2/longVote_TL.png} 
@@ -237,22 +241,30 @@
 
 \holine
 \vspace{-0.2cm}
-\subtitle{Cumulative Histogram of \# of Answers vs Users}
+\subtitle{K-fold Cross Validation Accuracy on Real Datasets}
 \vspace{-0.3cm}
 \begin{center}
-\includegraphics[width=0.7\textwidth]{results_ver2/so_user_anscnt_hist.png} 
+%\includegraphics[width=0.7\textwidth]{results_ver2/so_user_anscnt_hist.png} 
+\includegraphics[width=0.7\textwidth]{results_ver2/resultBAR2.png} 
 \vspace{-0.7cm}
 \end{center}
 
-\holine
-\vspace{-0.2cm}
-\subtitle{Other Applications}
-\vspace{0.0cm}
-
 \begin{itemize}
-        \item Get the ranking of all users
-        \item Extract learning curve of users
+    \item We use K=10. We predict the clicks (UpVote/DownVote) made by Users and average over each fold.
+    \item Note: Its a multiclass problem with varying number of classes.\\ %which makes it challenging.
+    \item Evaluation Metric 1 : Absolute - $click = argmax(\phi_{j};j \in X)$, $X$ is list of answers for this question.
+\item Evaluation Metric 2 : Probabilistic - $click \sim P(\frac{exp(\phi_j)}{exp(\phi_1) + ... + exp(\phi_n)})$
 \end{itemize}
+
+%\holine
+%\vspace{-0.2cm}
+%\subtitle{Other Applications}
+%\vspace{0.0cm}
+%
+%\begin{itemize}
+%        \item Get the ranking of all users
+%        \item Extract learning curve of users
+%\end{itemize}
 % ====================================================================
 \end{column}
 % ====================================================================
