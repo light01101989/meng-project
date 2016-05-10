@@ -9,6 +9,7 @@ parser.add_argument('-f','--filter', help='Flag to enable filtering of files. Fl
 parser.add_argument('-p','--minpost', help='Minimum number of post for user to qualify(inclusive)',required=False,type=int,default=5)
 parser.add_argument('-u','--minuser', help='Minimum number of qualified user in a Q/A pair(inclusive)', required=False,type=int,default=3)
 parser.add_argument('-s','--structure', help='Flag to structure data in dataStructures.', required=False,action='store_true')
+parser.add_argument('-k','--kfold', help='Number of folds to create and run. k=1 is special case where it just trains on full data.',required=True,type=int)
 parser.add_argument('-r','--run', help='Run the optimization and dump solution.', required=False,action='store_true')
 args = parser.parse_args()
 
@@ -21,7 +22,7 @@ if args.filter or args.all:
     subprocess.call("python ../../ver2/filterPosts.py -p %d -u %d" % (args.minpost,args.minuser),shell=True)
 if args.structure or args.all:
     print "\n---RUNNING structureBigData.py---"
-    subprocess.call("python ../../ver2/structureBigData.py",shell=True)
+    subprocess.call("python ../../ver2/structureBigData.py -k %d" % (args.kfold),shell=True)
 if args.run or args.all:
     print "\n---RUNNING runBigData.py---"
-    subprocess.call("python ../../ver2/runBigData.py -l",shell=True)
+    subprocess.call("python ../../ver2/runBigData.py -l -k %d" % (args.kfold),shell=True)

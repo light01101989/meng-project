@@ -7,10 +7,15 @@ import operator
 from datetime import datetime
 import pickle
 import os
+import argparse
 
 # Create date datatype
 def date(token):
     return datetime.strptime(token, "%Y-%m-%d")
+
+parser = argparse.ArgumentParser(description='Script to structure data for running optimization. Should be called from datasets/<xyz> directory')
+parser.add_argument('-k','--kfold', help='Number of folds to create. k=1 is special case where it just creates one training set of full data.',required=True,type=int)
+args = parser.parse_args()
 
 # open file to read
 pfile = open('filterFiles/filterPosts.csv', 'r')
@@ -28,6 +33,7 @@ qcl = {}    # Ques: choice list
 qtcl = {}   # Ques: time, choice list(not used)
 pluvt = {}  # post:list of upvote time
 pldvt = {}  # post:list of downvote time
+atu = {}    # ans:user/owner
 
 ualist = {v.split(':')[0]:[] for v in ufile}
 
@@ -52,6 +58,9 @@ for post in pfile:
         # Make user entry
         if temp[1] in ualist:
             ualist[temp[1]].append(temp[0])
+
+        # Make ans to user entry
+        atu[temp[0]] = temp[1]
 
         if temp[2] not in qla:
             continue
@@ -101,111 +110,150 @@ for vote in vfile:
         if temp[1] in pldvt:
             pldvt[temp[1]].append(date(temp[3].split('T')[0]))
 
-# Important data structures
-aidtoaidx = {}
-qaidx = {}
-uaidx = {}
-uaidx['-2'] = []    # Fake User for Fake answers
-uphiidx = {}
+# k-fold cross validation
+k = args.kfold
+# divide dataset into 10 parts
+foldSize = len(qla.keys())/k
 
-cnt = 0
-# create observations: qobs
-qobs = {}
-ansFake = 0     # 0 corresponds to fake answer which
-                # distuinguish between wrong and right
 # datastructure used are
 # qcl and pluvt, qla, qpat
 maxVoteQues = 0
-for key in qla:
-    # qaidx part
-    qaidx[key] = []
-    # Add fake answer
-    fid = 'F' + key
-    aidtoaidx[fid] = cnt; cnt+=1
-    qaidx[key].append(aidtoaidx[fid])
-    uaidx['-2'].append(aidtoaidx[fid])
-    # Add real answers
-    for ans in qla[key]:
-        aidtoaidx[ans] = cnt; cnt+=1
-        qaidx[key].append(aidtoaidx[ans])
+for fold in xrange(k):
+    # Important data structures
+    aidtoaidx = {}
+    qaidx = {}
+    uaidx = {}
+    uaidx['-2'] = []    # Fake User for Fake answers
+    uphiidx = {}
 
-    # qvHist part
-    qobs[key] = []
-    ansNum = 1
-    maxAnsNum = 0
-    maxUpvote = 0
-    for ans in qla[key]:
-        cntUpvote = 0
-        # UpVote
-        for evote in pluvt[ans]:
-            # do binary search in qpat to find the index
-            idx = np.searchsorted(qpat[key],evote,side='right')-1
-            newObs = [ansNum,qcl[key][idx]]
-            qobs[key].append(newObs)
-            cntUpvote += 1
+    # create observations: qobs
+    qobs = {}
+    ansFake = 0     # 0 corresponds to fake answer which
+                    # distuinguish between wrong and right
+    print "Prepping data for fold %d..." % fold
+    valset = []
+    #trset = []
+    icount=0
+    cnt = 0
+    if k==1:
+        low = 0
+        high = 0
+    else:
+        low = fold*foldSize
+        high = (fold+1)*foldSize
 
-        # Answer with maxUpvote
-        if maxUpvote < cntUpvote:
-            maxUpvote = cntUpvote
-            maxAnsNum = ansNum
+    for key in qla:
+        if icount>=low and icount<high:
+            valset.append(key)
+        else:
+            #trset.append(key)
+            # qaidx part
+            qaidx[key] = []
+            # Add fake answer
+            fid = 'F' + key
+            aidtoaidx[fid] = cnt; cnt+=1
+            qaidx[key].append(aidtoaidx[fid])
+            uaidx['-2'].append(aidtoaidx[fid])
+            # Add real answers
+            for ans in qla[key]:
+                aidtoaidx[ans] = cnt; cnt+=1
+                qaidx[key].append(aidtoaidx[ans])
 
-        # DownVote
-        for edvote in pldvt[ans]:
-            newObs = [ansFake, [ansFake, ansNum]]
-            qobs[key].append(newObs)
-            #print "downvote in key ", key
-        ansNum += 1
+            # qvHist part
+            qobs[key] = []
+            ansNum = 1
+            maxAnsNum = 0
+            maxUpvote = 0
+            for ans in qla[key]:
+                cntUpvote = 0
+                # UpVote
+                for evote in pluvt[ans]:
+                    # do binary search in qpat to find the index
+                    idx = np.searchsorted(qpat[key],evote,side='right')-1
+                    newObs = [ansNum,qcl[key][idx]]
+                    qobs[key].append(newObs)
+                    cntUpvote += 1
 
-    # Print keys where last answer rocks
-    #if maxAnsNum == ansNum-1 and maxAnsNum > 2:
-    #    print key
-    # Max
-    if len(qobs[key]) > maxVoteQues:
-        maxVoteQues = len(qobs[key])
-        maxKey = key
+                # Answer with maxUpvote
+                if maxUpvote < cntUpvote:
+                    maxUpvote = cntUpvote
+                    maxAnsNum = ansNum
 
-print "Number of answers: ", cnt
+                # DownVote
+                for edvote in pldvt[ans]:
+                    newObs = [ansFake, [ansFake, ansNum]]
+                    qobs[key].append(newObs)
+                    #print "downvote in key ", key
+                ansNum += 1
 
-# Ulist
-## Get list for Userid:displayname:Reputation:UpVotes:DownVotes
-uphiidx['-2'] = cnt; cnt+=1
-for user in ualist:
-    uaidx[user] = []
-    uphiidx[user] = cnt; cnt+=1
-    for ans in ualist[user]:
-        uaidx[user].append(aidtoaidx[ans])
+            # Print keys where last answer rocks
+            #if maxAnsNum == ansNum-1 and maxAnsNum > 2:
+            #    print key
+            # Max
+            if len(qobs[key]) > maxVoteQues:
+                maxVoteQues = len(qobs[key])
+                maxKey = key
+        icount+=1
 
-print "Number of answers+users: ", cnt
+    print "Number of answers: ", cnt
 
-# Print
-if 0:
-    print "qaidx",qaidx
-    print "uaidx",uaidx
-    print "uphiidx",uphiidx
-    print "aidtoaidx",aidtoaidx
-    print "qvHist",qobs
+    # Ulist
+    ## Get list for Userid:displayname:Reputation:UpVotes:DownVotes
+    uphiidx['-2'] = cnt; cnt+=1
+    for user in ualist:
+        uaidx[user] = []
+        uphiidx[user] = cnt; cnt+=1
+        for ans in ualist[user]:
+            #FIXME: for ans there might not be an entry #FIXED
+            if ans in aidtoaidx:
+                uaidx[user].append(aidtoaidx[ans])
 
-# Make directory if not present
-d = "dataStructures"
-if not os.path.exists(d):
-    os.makedirs(d)
+    print "Number of answers+users: ", cnt
 
-# Dump
-f1 = open("dataStructures/numParameters.pkl", 'wb')
-pickle.dump(cnt,f1)
-f1.close()
-f1 = open("dataStructures/qaidx.pkl", 'wb')
-pickle.dump(qaidx,f1)
-f1.close()
-f1 = open("dataStructures/aidtoaidx.pkl", 'wb')
-pickle.dump(aidtoaidx,f1)
-f1.close()
-f1 = open("dataStructures/uaidx.pkl", 'wb')
-pickle.dump(uaidx,f1)
-f1.close()
-f1 = open("dataStructures/uphiidx.pkl", 'wb')
-pickle.dump(uphiidx,f1)
-f1.close()
-f1 = open("dataStructures/qvHist.pkl", 'wb')
-pickle.dump(qobs,f1)
-f1.close()
+    # Print
+    if 0:
+        print "qaidx",qaidx
+        print "uaidx",uaidx
+        print "uphiidx",uphiidx
+        print "aidtoaidx",aidtoaidx
+        print "qvHist",qobs
+
+    # Make directory if not present
+    if k!=1:
+        d = "dataStructures_fold%d" % fold
+    else:
+        d = "dataStructures_gen"
+    if not os.path.exists(d):
+        os.makedirs(d)
+
+    # Dump
+    f1 = open(d+"/valset.pkl", 'wb')
+    pickle.dump(valset,f1)
+    f1.close()
+    f1 = open(d+"/numParameters.pkl", 'wb')
+    pickle.dump(cnt,f1)
+    f1.close()
+    f1 = open(d+"/qaidx.pkl", 'wb')
+    pickle.dump(qaidx,f1)
+    f1.close()
+    f1 = open(d+"/aidtoaidx.pkl", 'wb')
+    pickle.dump(aidtoaidx,f1)
+    f1.close()
+    f1 = open(d+"/uaidx.pkl", 'wb')
+    pickle.dump(uaidx,f1)
+    f1.close()
+    f1 = open(d+"/uphiidx.pkl", 'wb')
+    pickle.dump(uphiidx,f1)
+    f1.close()
+    f1 = open(d+"/qvHist.pkl", 'wb')
+    pickle.dump(qobs,f1)
+    f1.close()
+
+# Dump qla and atu, used during prediction phase
+if k==1:
+    f1 = open(d+"/qla.pkl", 'wb')
+    pickle.dump(qla,f1)
+    f1.close()
+    f1 = open(d+"/atu.pkl", 'wb')
+    pickle.dump(atu,f1)
+    f1.close()
